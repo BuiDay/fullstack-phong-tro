@@ -13,13 +13,31 @@ export interface Iapp{
   categories?:any[],
 }
 
-export interface IAuthAction {
-    type: string
-    auth: IAuth
-  }
-
-
-  export interface IAuthState {
-    auths: IAuth[]
-  }
   
+export interface IAuthRegister{
+  name?:string,
+  phone?:string,
+  password?:string
+}
+
+export interface IAuthLogin{
+  phone?:string,
+  password?:string
+}
+
+export interface IPost{
+  posts?: any[],
+  msg?:string,
+  count?:number ,
+  newPosts?: any[],
+  isLoading?:boolean
+}
+
+export interface IPostPayload{
+  err?:string,
+  msg?:string,
+  response?:{
+    count?:number,
+    rows?:object[]
+  }
+}

@@ -1,5 +1,6 @@
 import axiosConfig from '../../../utils/axiosConfig' 
-const apiRegister =  (data:any) => 
+import { IAuthRegister,IAuthLogin } from '../InterfaceReducer'
+const apiRegister =  (data:IAuthRegister) => 
     new Promise(async(resolve, reject)=>{
         try {
             const res = await axiosConfig({
@@ -13,9 +14,22 @@ const apiRegister =  (data:any) =>
         }
     })
 
+const apiLogin =  (data:IAuthLogin) => 
+new Promise(async(resolve, reject)=>{
+    try {
+        const res = await axiosConfig({
+            method:"post",
+            url:'/api/v1/auth/login',
+            data:data
+        })
+        resolve(res.data)
+    } catch (error) {
+        reject(error)
+    }
+})
 
 const authService = {
-    apiRegister
+    apiRegister,apiLogin
 }
 
 export default authService

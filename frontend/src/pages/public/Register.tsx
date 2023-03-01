@@ -4,11 +4,11 @@ import Button from '../../components/Button/Button'
 import { path } from '../../utils/constant';
 import { Link, useNavigate } from 'react-router-dom';
 import {register} from '../../store/features/auth/authSilce'
-import {useDispatch,useSelector} from 'react-redux'
 import { validatePassword, validatePhone } from '../../utils/validateForm';
 import { useAppSelector, useAppDispatch } from '../../store/hook'
 
-export interface IParamsAuth{
+
+export interface IParamsRegister{
     name?:string,
     phone?:string,
     password?:string
@@ -16,18 +16,16 @@ export interface IParamsAuth{
 
 const Register = () => {
     const dispatch = useAppDispatch();
-    const authState = useAppSelector(state=>state.auth.isError);
+    const authState = useAppSelector(state=>state.auth);
     const navigate = useNavigate ();
 
-    console.log(authState)
-
-    const [params, setParams] = useState<IParamsAuth>({
+    const [params, setParams] = useState<IParamsRegister>({
         name:"",
         phone:"",
         password:""
     })
 
-    const [validate, setValidate] = useState<IParamsAuth>({
+    const [validate, setValidate] = useState<IParamsRegister>({
         name:"",
         phone:"",
         password:""
@@ -58,16 +56,15 @@ const Register = () => {
                     password:validatePhone(params.password)?"":"Mật khẩu cần có chữ hoa, kí tự đặc và chữ số!",
                     phone:validatePhone(params.phone) ? "" : "Số điện thoại không hợp lệ!"})
             }else{
-                dispatch(register(params))
-                
+             dispatch(register(params))
             }
         }
     }
-    // useEffect(()=>{
-    //     if(authState.msg === "Register is successfull"){
-    //         navigate("/login")
-    //     }
-    // },[authState.msg])
+    useEffect(()=>{
+        if(authState.msg === "Register is successfull"){
+            navigate("/login")
+        }
+    },[authState.msg])
  
     return (
         <div className='bg-white w-[600px] mt-10 p-[30px] pb-[100px] rounded-md shadow-sm'>
@@ -93,7 +90,7 @@ const Register = () => {
                 fullWidth
                 onClick={handleSubmit}
             />
-            {/* <div className='text-[red] text-sm'>{handlError(authState.msg)}</div> */}
+            <div className='text-[red] text-sm'>{handlError(authState.msg)}</div>
         </div>
        <div className='mt-5'>
         <p className='text-sm'>

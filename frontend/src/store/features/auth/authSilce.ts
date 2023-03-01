@@ -1,8 +1,9 @@
-import { createSlice, createAsyncThunk, createAction, PayloadAction, Reducer } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, createAction, PayloadAction, Reducer, AsyncThunkAction } from "@reduxjs/toolkit"
 import { IAuth} from "../InterfaceReducer";
 import authService from "./authService";
+import { IAuthRegister,IAuthLogin } from '../InterfaceReducer'
 
-const initState = {
+const initState:IAuth = {
     isLoggedIn : false,
     token:"",
     msg:"",
@@ -11,9 +12,25 @@ const initState = {
     isSuccess:false,
 }
 
-export const register:any = createAsyncThunk("auth/register",async(data,thunkAPI)=>{
+export const register:any = createAsyncThunk("auth/register",async(data:IAuthRegister,thunkAPI)  =>{
     try{
         return await authService.apiRegister(data)
+    }catch(err){
+       return thunkAPI.rejectWithValue(err)
+    }
+})
+
+export const login:any = createAsyncThunk("auth/login",async(data:IAuthLogin,thunkAPI)  =>{
+    try{
+        return await authService.apiLogin(data)
+    }catch(err){
+       return thunkAPI.rejectWithValue(err)
+    }
+})
+
+export const logout:any = createAsyncThunk("auth/logout",async(data,thunkAPI)  =>{
+    try{
+        return 1
     }catch(err){
        return thunkAPI.rejectWithValue(err)
     }
@@ -28,18 +45,44 @@ export const authSlice = createSlice({
         .addCase(register.pending,(state:IAuth)=>{
             state.isLoading = true;
         })
-        .addCase(register.fulfilled,(state:IAuth,action:PayloadAction<any>)=>{
+        .addCase(register.fulfilled,(state:IAuth,action:PayloadAction<IAuth>)=>{
             state.isLoading = false;
             state.isSuccess = true;
             state.isLoggedIn = false;
             state.msg = action.payload.msg ;
         })
-        .addCase(register.rejected,(state:IAuth,action:PayloadAction<any>)=>{
+        .addCase(register.rejected,(state:IAuth,action:PayloadAction<IAuth>)=>{
             state.isLoading = false;
             state.isSuccess = false;
             state.isLoggedIn = false;
             state.isError = true;
             state.msg = action.payload.msg;
+        })
+
+        .addCase(login.pending,(state:IAuth)=>{
+            state.isLoading = true;
+        })
+        .addCase(login.fulfilled,(state:IAuth,action:PayloadAction<IAuth>)=>{
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isLoggedIn = true;
+            state.msg = action.payload.msg ;
+            state.token = action.payload.token;
+        })
+        .addCase(login.rejected,(state:IAuth,action:PayloadAction<IAuth>)=>{
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isLoggedIn = false;
+            state.isError = true;
+            state.token = undefined;
+            state.msg = action.payload.msg;
+        })
+
+        .addCase(logout.fulfilled,(state:IAuth)=>{
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.isLoggedIn = false;
+            state.token = undefined;
         })
     },
 })

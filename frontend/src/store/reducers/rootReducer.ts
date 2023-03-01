@@ -4,6 +4,7 @@ import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
 import {persistReducer} from "redux-persist"
 import authReducer from '../features/auth/authSilce'
 import appReducer from '../features/app/appSilce'
+import postReducer from '../features/post/postSilce'
 import { RootState } from '../redux'
 
 
@@ -20,7 +21,8 @@ const authConfig = {
 
 const rootReducer = combineReducers({
     auth:persistReducer<any, any>(authConfig,authReducer),
-    app:appReducer
+    app:appReducer,
+    post:postReducer
 })
 
 export default rootReducer
