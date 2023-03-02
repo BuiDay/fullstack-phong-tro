@@ -10,6 +10,8 @@ const NewPost = () => {
     useEffect(() => {
         dispatch(actions.getNewPosts())
     }, [])
+
+    
     return (
         <div className='w-full bg-white rounded-md p-4' >
             <h3 className='font-semibold text-lg mb-4'>Tin mới đăng</h3>
