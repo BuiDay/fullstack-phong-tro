@@ -6,6 +6,7 @@ import { path } from './utils/constant';
 import Navigation from './components/Navigation/Navigation'
 import { useAppDispatch } from '../src/store/hook'
 import { getCategories,apiGetAreas,apiGetPrices } from './store/features/app/appSilce';
+import Footer from './pages/public/Footer';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -25,12 +26,13 @@ function App() {
           <Route path={path.HOME} element = {<HomePage/>}/>
           <Route path={path.LOGIN} element = {<Login/>}/>
           <Route path={path.REGISTER} element = {<Register/>} />
-          <Route path={path.CHO_THUE_CAN_HO} element = {<Rental/>} />
-          <Route path={path.CHO_THUE_MAT_BANG} element = {<Rental />} />
-          <Route path={path.CHO_THUE_PHONG_TRO} element = {<Rental/>} />
-          <Route path={path.NHA_CHO_THUE} element = {<Rental/>} />
+          <Route path={path.CHO_THUE_CAN_HO} element = {<Rental id={1}/>} />
+          <Route path={path.CHO_THUE_MAT_BANG} element = {<Rental id={2}/>} />
+          <Route path={path.CHO_THUE_PHONG_TRO} element = {<Rental id={3}/>} />
+          <Route path={path.NHA_CHO_THUE} element = {<Rental id={4}/>} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   </div>
   );

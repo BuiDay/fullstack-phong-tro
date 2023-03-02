@@ -44,7 +44,7 @@ const ItemSidebar:React.FC<IProps> = ({ title, content, isDouble, type }) => {
                 {content && content?.length > 0 && content.map(item => {
                     return (
                         <Link
-                            to={`${formatVietnameseToString(item.value)}`}
+                            to={`/${formatVietnameseToString(item.value)}`}
                             key={item.code}
                             className='flex gap-2 items-center cursor-pointer hover:text-orange-600 border-b border-gray-200 pb-1 border-dashed'
                         >

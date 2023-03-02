@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react'
-import { Sitem } from './index'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../store/actions'
+import Sitem  from './ItemNewPost'
+import { useAppSelector,useAppDispatch } from '../../store/hook'
+import { getNewPost } from '../../store/features/post/postSilce'
 
 const NewPost = () => {
-    const { newPosts } = useSelector(state => state.post)
-    const dispatch = useDispatch()
+    const { newPosts } = useAppSelector(state => state.post)
+    const dispatch = useAppDispatch()
+
+    console.log(newPosts)
 
     useEffect(() => {
-        dispatch(actions.getNewPosts())
+        dispatch(getNewPost())
     }, [])
 
-    
     return (
         <div className='w-full bg-white rounded-md p-4' >
             <h3 className='font-semibold text-lg mb-4'>Tin mới đăng</h3>
@@ -20,6 +21,7 @@ const NewPost = () => {
                     return (
                         <Sitem
                             key={item.id}
+                            id = {item.id}
                             title={item.title}
                             price={item?.attributes?.price}
                             createdAt={item.createdAt}
@@ -27,7 +29,6 @@ const NewPost = () => {
                         />
                     )
                 })}
-
             </div>
         </div>
     )

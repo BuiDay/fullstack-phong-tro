@@ -33,7 +33,7 @@ export const apiGetNewPosts = () => new Promise(async (resolve, reject) => {
             method: 'get',
             url: `/api/v1/post/new-post`,
         })
-        resolve(response)
+        resolve(response.data)
 
     } catch (error) {
         reject(error)

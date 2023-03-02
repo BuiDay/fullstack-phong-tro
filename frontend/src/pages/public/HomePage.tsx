@@ -4,6 +4,7 @@ import { Search,Province,List} from '../../components/index'
 import { useAppSelector, useAppDispatch } from '../../store/hook'
 import Pagination from '../../components/Pagination/Pagination';
 import ItemSidebar from '../../components/ItemSidebar/ItemSidebar';
+import NewPost from '../../components/NewPost/NewPost';
 
 const HomePage = () => {
     const {categories,areas,prices} = useAppSelector(state => state.app)
@@ -24,6 +25,7 @@ const HomePage = () => {
                     <ItemSidebar content={categories} title='Danh sách cho thuê' />
                     <ItemSidebar isDouble={true} type='priceCode' content={prices} title='Xem theo giá' />
                     <ItemSidebar isDouble={true} type='areaCode' content={areas} title='Xem theo diện tích' />
+                    <NewPost />
                 </div>
             </div>
         </div>
