@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Routes, Route ,BrowserRouter} from 'react-router-dom'
 import './App.css';
 import { Header, Home, HomePage, Login,Register,Rental } from './pages/public';
 import { path } from './utils/constant';
 import Navigation from './components/Navigation/Navigation'
+import { useAppDispatch } from '../src/store/hook'
+import { getCategories,apiGetAreas,apiGetPrices } from './store/features/app/appSilce';
 
 function App() {
+  const dispatch = useAppDispatch();
+   
+  useEffect(() => {
+      dispatch(getCategories())
+      dispatch(apiGetAreas())
+      dispatch(apiGetPrices())
+  }, [])
   return (
-    <div className="w-screen bg-primary h-screen">
+    <div className="bg-primary">
     <BrowserRouter>
     <Header/>
     <Navigation/>

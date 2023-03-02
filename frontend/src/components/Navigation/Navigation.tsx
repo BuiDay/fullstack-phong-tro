@@ -1,10 +1,8 @@
 import React, { useEffect,useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import { formatVietnameseToString } from '../../utils\/formatVietnameseToString'
-import { useAppSelector, useAppDispatch } from '../../store/hook'
-import { getCategories } from '../../store/features/app/appSilce'
 import { RootState } from "../../store/redux";
-
+import { useAppSelector } from '../../store/hook'
 interface Icate{
     code?:string,
     header?:string,
@@ -14,12 +12,7 @@ interface Icate{
 }
 
 const Navigation = () => {
-    const dispatch = useAppDispatch();
     const categories  = useAppSelector((state:RootState) => state.app.categories)
-    useEffect(() => {
-        dispatch(getCategories())
-    }, [])
-
     return (
         <div className='w-full h-[40px] bg-secondary flex items-center text-white'>
             <div className='w-1100 h-full m-auto items-center flex text-sm font-medium'>

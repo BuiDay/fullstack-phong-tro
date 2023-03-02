@@ -10,13 +10,14 @@ interface IPropsButton{
     fullWidth?:any,
     link?:any,
     py?:string
+    px?:string
 }
 
-const Button:React.FC<IPropsButton> = ({text, bgColor, textColor,icon,onClick,fullWidth,link,py}) => {
+const Button:React.FC<IPropsButton> = ({text, bgColor, textColor,icon,onClick,fullWidth,link,py,px}) => {
 
     return (
         <button type="button" 
-            className={`${py? py :"py-2"} px-4 ${bgColor} ${fullWidth && "w-full"} ${textColor} outline-none rounded-md hover:underline justify-center flex items-center gap-1`} 
+            className={`${py? py :"py-2"} ${px ? px :"px-4"} ${bgColor} ${fullWidth && "w-full"} ${textColor} outline-none rounded-md hover:underline justify-center flex items-center gap-1`} 
             onClick={onClick}
             >
             <Link to={link}>{text}</Link> 

@@ -11,9 +11,10 @@ export interface IAuth{
 export interface Iapp{
   msg?:string,
   categories?:any[],
+  prices:any[],
+  areas:any[],
 }
 
-  
 export interface IAuthRegister{
   name?:string,
   phone?:string,
@@ -28,7 +29,7 @@ export interface IAuthLogin{
 export interface IPost{
   posts?: any[],
   msg?:string,
-  count?:number ,
+  count?:number,
   newPosts?: any[],
   isLoading?:boolean
 }
@@ -40,4 +41,9 @@ export interface IPostPayload{
     count?:number,
     rows?:object[]
   }
+}
+
+export interface IAppPayload{
+  msg?:string,
+  response:object[]
 }

@@ -24,15 +24,11 @@ interface IPosts{
    posts?:IPost[];
 }
 
-
-
 const List:React.FC<IProps> = ({ categoryCode }) => {
     const dispatch = useAppDispatch()
     const [searchParams]:any= useSearchParams()
 
     const posts:IPosts = useAppSelector(state => state.post.posts) as IPosts
-
-    console.log(posts)
     useEffect(() => {
         let params = []
         for (let entry of searchParams.entries()) {

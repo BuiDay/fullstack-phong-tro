@@ -65,18 +65,18 @@ const Item:React.FC<IPost> = ({ images, user, title, star, description, attribut
                 <div className='flex items-center my-5 justify-between'>
                     <div className=' flex items-center'>
                         <img src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png" alt="avatar" className='w-[30px] h-[30px] object-cover rounded-full' />
-                        <p>{user?.name}</p>
+                        <p className='ml-2'>{user?.name}</p>
                     </div>
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-1 whitespace-nowrap'>
                         <button
                             type='button'
-                            className='bg-blue-700 text-white p-1 rounded-md'
+                            className='bg-blue-700 text-white px-2 rounded-md'
                         >
                             {`Gọi ${user?.phone}`}
                         </button>
                         <button
                             type='button'
-                            className='text-blue-700 px-1 rounded-md border border-blue-700'
+                            className='text-blue-700 px-2 rounded-md border border-blue-700'
                         >
                             Nhắn zalo
                         </button>

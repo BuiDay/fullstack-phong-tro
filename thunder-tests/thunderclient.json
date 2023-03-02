@@ -140,5 +140,19 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "0c7f5f23-2ef4-4253-8e36-7e1939158f47",
+    "colId": "b0abac8a-bd62-40f5-83cd-b43fcd11a906",
+    "containerId": "",
+    "name": "New post",
+    "url": "http://localhost:8000/api/v1/post/new-post",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2023-03-02T11:39:17.834Z",
+    "modified": "2023-03-02T11:39:27.006Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
