@@ -110,8 +110,6 @@ export const insertService = () => new Promise(async (resolve, reject) => {
         labelCodes?.forEach(async (item) => {
             await db.Label.create(item)
         })
-
-
         resolve('Done.')
     } catch (error) {
         reject(error)
@@ -122,6 +120,7 @@ export const createPricesAndAreas = () => new Promise((resolve, reject) => {
     try {
         dataPrice.forEach(async (item, index) => {
             await db.Price.create({
+                id:item.index,
                 code: item.code,
                 value: item.value,
                 order: index + 1
@@ -129,6 +128,7 @@ export const createPricesAndAreas = () => new Promise((resolve, reject) => {
         })
         dataArea.forEach(async (item, index) => {
             await db.Area.create({
+                id:item.index,
                 code: item.code,
                 value: item.value,
                 order: index + 1

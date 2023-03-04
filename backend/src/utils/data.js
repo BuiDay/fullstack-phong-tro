@@ -51,22 +51,22 @@ const areas = [
     {
         min: 20,
         max: 30,
-        value: 'Từ 20m - 30m'
+        value: 'Từ 20-30m'
     },
     {
         min: 30,
         max: 50,
-        value: 'Từ 30m - 50m'
+        value: 'Từ 30-50m'
     },
     {
         min: 50,
         max: 70,
-        value: 'Từ 50m - 70m'
+        value: 'Từ 50-70m'
     },
     {
         min: 70,
         max: 90,
-        value: 'Từ 70m - 90m'
+        value: 'Từ 70-90m'
     },
     {
         min: 90,

@@ -14,11 +14,11 @@ const Header= () => {
         dispatch(logout())
     }
     return (
-        <div className='w-1100 m-auto flex items-center justify-between'>
+        <div className='w-1100 m-auto flex items-center justify-between py-4'>
             <div>
-                <Link to="/"> 
+                {/* <Link to="/"> 
                     <img src={require('../../asset/images/logo-removebg-preview.png')} alt="logo" className='w-[240px] h-[70px] object-contain'/>
-                </Link>
+                </Link> */}
             </div>
             {
                 isLoggedIn ? (

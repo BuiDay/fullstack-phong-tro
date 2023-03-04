@@ -64,14 +64,14 @@ const ItemSidebar:React.FC<IProps> = ({ title, content, isDouble, type }) => {
                                     className='flex flex-1 gap-2 items-center cursor-pointer hover:text-orange-600 border-b border-gray-200 pb-1 border-dashed'
                                 >
                                     <GrNext size={10} color='#ccc' />
-                                    <p>{item.left.value}</p>
+                                    <p>{type === 'areaCode' ? item.left.value+"\xb2":item.left.value}</p>
                                 </div>
                                 <div
                                     className='flex flex-1 gap-2 items-center cursor-pointer hover:text-orange-600 border-b border-gray-200 pb-1 border-dashed'
                                     onClick={() => handleFilterPosts(item.right.code)}
                                 >
                                     <GrNext size={10} color='#ccc' />
-                                    <p>{item.right.value}</p>
+                                    <p>{type === 'areaCode' ? item.right.value+"\xb2":item.right.value}</p>
                                 </div>
                             </div>
                         </div>

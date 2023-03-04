@@ -5,7 +5,7 @@ import { Header, Home, HomePage, Login,Register,Rental } from './pages/public';
 import { path } from './utils/constant';
 import Navigation from './components/Navigation/Navigation'
 import { useAppDispatch } from '../src/store/hook'
-import { getCategories,apiGetAreas,apiGetPrices } from './store/features/app/appSilce';
+import { getCategories,apiGetAreas,apiGetPrices,apiGetProvinces } from './store/features/app/appSilce';
 import Footer from './pages/public/Footer';
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
       dispatch(getCategories())
       dispatch(apiGetAreas())
       dispatch(apiGetPrices())
+      dispatch(apiGetProvinces())
   }, [])
   return (
     <div className="bg-primary">

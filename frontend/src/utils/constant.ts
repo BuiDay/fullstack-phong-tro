@@ -12,7 +12,8 @@ export const location = [
     {
         id: 'hcm',
         name: 'Phòng trọ Hồ Chí Minh',
-        image: 'https://phongtro123.com/images/location_hcm.jpg'
+        image: 'https://phongtro123.com/images/location_hcm.jpg',
+        code:"CUID"
     },
     {
         name: 'Phòng trọ Hà Nội',

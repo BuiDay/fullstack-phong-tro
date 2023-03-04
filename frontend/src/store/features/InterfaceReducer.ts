@@ -13,6 +13,7 @@ export interface Iapp{
   categories?:any[],
   prices:any[],
   areas:any[],
+  provinces:any[],
 }
 
 export interface IAuthRegister{

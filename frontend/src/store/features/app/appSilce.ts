@@ -8,6 +8,7 @@ const initState:Iapp = {
     categories: [],
     prices: [],
     areas: [],
+    provinces:[],
 }
 
 
@@ -36,6 +37,15 @@ export const apiGetAreas:any = createAsyncThunk("app/get-area",async(data,thunkA
     }
 })
 
+export const apiGetProvinces:any = createAsyncThunk("app/get-provinces",async(data,thunkAPI)=>{
+    try{
+        return await appService.apiGetProvinces()
+    }catch(err){
+       return thunkAPI.rejectWithValue(err)
+    }
+})
+
+
 
 export const appSlice = createSlice({
     name:"app",
@@ -54,6 +64,10 @@ export const appSlice = createSlice({
         .addCase(apiGetAreas.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
             state.msg = action.payload.msg;
             state.areas = action.payload.response
+        })
+        .addCase(apiGetProvinces.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
+            state.msg = action.payload.msg;
+            state.provinces = action.payload.response
         })
     },
 })

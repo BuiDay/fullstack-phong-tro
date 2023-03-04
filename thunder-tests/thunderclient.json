@@ -154,5 +154,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b94e9371-b0c6-4c70-a3b7-3554f7aef8ca",
+    "colId": "bddf6fe5-0d87-43e2-b6bb-0509fb0818f0",
+    "containerId": "",
+    "name": "Get all",
+    "url": "http://localhost:8000/api/v1/province/all",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-03-04T16:09:26.344Z",
+    "modified": "2023-03-04T16:09:44.054Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
