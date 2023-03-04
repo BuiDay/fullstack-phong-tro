@@ -7,8 +7,6 @@ const NewPost = () => {
     const { newPosts } = useAppSelector(state => state.post)
     const dispatch = useAppDispatch()
 
-    console.log(newPosts)
-
     useEffect(() => {
         dispatch(getNewPost())
     }, [])

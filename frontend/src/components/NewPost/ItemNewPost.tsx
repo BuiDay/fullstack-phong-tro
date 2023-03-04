@@ -32,7 +32,7 @@ const Sitem:React.FC<IProps> = ({ title, price, image, createdAt,id }) => {
         <>
         <style>{styles}</style>
         <Link className='w-full flex items-center gap-2 py-2 item__newPost' 
-        to={`chi-tiet/${formatVietnameseToString(title||"not found")}/${id}`}
+        to={`/chi-tiet/${formatVietnameseToString(title||"not found")}/${id}`}
         >
             <img
                 src={image && image[0]}

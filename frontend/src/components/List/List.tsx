@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getPostLimit } from '../../store/features/post/postSilce';
 import { useAppSelector, useAppDispatch } from '../../store/hook'
 import Item from '../Item/Item';
+import Loading from '../Loading/Loading';
 
 interface IProps{
     categoryCode?:any
@@ -27,7 +28,6 @@ interface IPosts{
 const List:React.FC<IProps> = ({ categoryCode }) => {
     const dispatch = useAppDispatch()
     const [searchParams]:any= useSearchParams()
-
     const posts:IPosts = useAppSelector(state => state.post.posts) as IPosts
     useEffect(() => {
         let params = []
@@ -45,6 +45,8 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
         if (categoryCode) searchParamsObject.categoryCode = categoryCode
         dispatch(getPostLimit(searchParamsObject))
     }, [searchParams, categoryCode])
+
+    const {isLoading} = useAppSelector(state => state.post)
     
     return (
         <div className='w-full bg-white shadow-md rounded-md'>
@@ -57,22 +59,32 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
                 <Button bgColor='bg-gray-200' text='Mặc định' py="py-1"/>
                 <Button bgColor='bg-gray-200' text='Mới nhất' py="py-1"/>
             </div>
-            <div className='items'>
-            {posts instanceof Array && posts?.length > 0 && posts?.map(item => {
-                    return (
-                        <Item
-                            key={item?.id}
-                            address={item?.address}
-                            attributes={item?.attributes}
-                            description={JSON.parse(item?.description)}
-                            images={JSON.parse(item?.images?.image)}
-                            star={+item?.star}
-                            title={item?.title}
-                            user={item?.user}
-                            id={item?.id}
-                        />
-                    )
-                })}
+            <div className={`items ${ isLoading && isLoading ? "" : "p-10"}`}>
+                {
+                   isLoading && !isLoading ? <div className='flex justify-center'> <Loading /> </div> : 
+                    <>
+                        {
+                            posts instanceof Array && posts?.length > 0 ? posts?.map(item => {
+                                return (
+                                    <Item
+                                        key={item?.id}
+                                        address={item?.address}
+                                        attributes={item?.attributes}
+                                        description={JSON.parse(item?.description)}
+                                        images={JSON.parse(item?.images?.image)}
+                                        star={+item?.star}
+                                        title={item?.title}
+                                        user={item?.user}
+                                        id={item?.id}
+                                    />
+                                )
+                            }):
+                            (
+                                <h1 className='text-center py-4 text-xl'>Không tìm ra kết quả</h1>
+                            )
+                        }
+                    </>
+                }
             </div>
         </div>
     );

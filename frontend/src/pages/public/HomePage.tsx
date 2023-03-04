@@ -1,7 +1,7 @@
 import React from 'react';
 import { text } from '../../utils/constant'
 import { Search,Province,List} from '../../components/index'
-import { useAppSelector, useAppDispatch } from '../../store/hook'
+import { useAppSelector} from '../../store/hook'
 import Pagination from '../../components/Pagination/Pagination';
 import ItemSidebar from '../../components/ItemSidebar/ItemSidebar';
 import NewPost from '../../components/NewPost/NewPost';

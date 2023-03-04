@@ -19,7 +19,7 @@ const Item:React.FC<IPost> = ({ images, user, title, star, description, attribut
     return (
         <div className='w-full flex border-t border-orange-600 py-4 px-3'>
             <Link
-                to={`chi-tiet/${formatVietnameseToString(title||"not found")}/${id}`}
+                to={`/chi-tiet/${formatVietnameseToString(title||"not found")}/${id}`}
                 className='w-2/5 flex flex-wrap gap-[2px] items-center relative cursor-pointer'
             >
                 { images && images.length > 0 && images.filter((i:any, index:number) => indexs.some(i => i === index))?.map((i:any, index:number) => {

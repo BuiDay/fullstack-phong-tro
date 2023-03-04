@@ -37,10 +37,12 @@ export const postSlice = createSlice({
             state.posts = action.payload.response?.rows;
             state.count = action.payload.response?.count
             state.msg = action.payload.msg;
+            state.isLoading = true
         })
         .addCase(getNewPost.fulfilled,(state:IPost,action:PayloadAction<any>)=>{
             state.newPosts = action.payload.response;
             state.msg = action.payload.msg;
+            state.isLoading = true
         })
 
     },

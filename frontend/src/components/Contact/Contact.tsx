@@ -16,8 +16,8 @@ const Contact = () => {
                     return (
                         <div key={index} className='flex flex-col items-center justify-center'>
                             <span className='text-orange-500 font-semibold'>{item.text}</span>
-                            <span className='text-blue-900 text-[24px] font-semibold'>{item.phone}</span>
-                            <span className='text-blue-900 text-[24px] font-semibold'>{item.zalo}</span>
+                            <span className='text-blue-900 text-[18px] font-semibold'>{item.phone}</span>
+                            <span className='text-blue-900 text-[18px] font-semibold'>{item.zalo}</span>
                         </div>
                     )
                 })}
