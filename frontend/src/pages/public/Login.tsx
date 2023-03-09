@@ -23,8 +23,7 @@ const Login = () => {
         phone:"",
         password:""
     })
-
-    console.log(params)
+    
     const handlError = (text:string) =>{
         if(text === "Password is wrong!") return "Mật khẩu không đúng!"
         if(text === "Phone number is not found!") return "Không tìm thấy số điện thoại!"
@@ -52,6 +51,8 @@ const Login = () => {
             }
         }
     }
+    console.log(authState)
+    console.log(authState.isLoggedIn)
 
     useEffect(()=>{
         if(authState.isLoggedIn){

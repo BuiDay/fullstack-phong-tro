@@ -22,7 +22,12 @@ new Promise(async(resolve, reject)=>{
             url:'/api/v1/auth/login',
             data:data
         })
+        if(res.data.err === -1)
+        {
+            reject(res.data)
+        }
         resolve(res.data)
+        
     } catch (error) {
         reject(error)
     }

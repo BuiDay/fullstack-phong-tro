@@ -62,6 +62,14 @@ export const authSlice = createSlice({
         .addCase(login.pending,(state:IAuth)=>{
             state.isLoading = true;
         })
+        .addCase(login.rejected,(state:IAuth,action:PayloadAction<IAuth>)=>{
+            state.isError = true;
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isLoggedIn = false;
+            state.msg = action.payload.msg ;
+            state.token = undefined;
+        })
         .addCase(login.fulfilled,(state:IAuth,action:PayloadAction<IAuth>)=>{
             state.isLoading = false;
             state.isSuccess = true;
@@ -69,14 +77,7 @@ export const authSlice = createSlice({
             state.msg = action.payload.msg ;
             state.token = action.payload.token;
         })
-        .addCase(login.rejected,(state:IAuth,action:PayloadAction<IAuth>)=>{
-            state.isLoading = false;
-            state.isSuccess = false;
-            state.isLoggedIn = false;
-            state.isError = true;
-            state.token = undefined;
-            state.msg = action.payload.msg;
-        })
+      
 
         .addCase(logout.fulfilled,(state:IAuth)=>{
             state.isLoading = false;
