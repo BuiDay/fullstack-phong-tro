@@ -14,6 +14,7 @@ export interface Iapp{
   prices:any[],
   areas:any[],
   provinces:any[],
+  isLoading:boolean
 }
 
 export interface IAuthRegister{
@@ -47,4 +48,23 @@ export interface IPostPayload{
 export interface IAppPayload{
   msg?:string,
   response:object[]
+}
+
+export interface IUser{
+  currentData:{
+    id?:string,
+    name?:string,
+    phone?:string,
+    zalo?:string,
+    fbUrl?:string,
+    avatar?:string,
+  }
+}
+
+
+
+export interface IUserPayload{
+  err:string,
+  msg:string,
+  response:{},
 }

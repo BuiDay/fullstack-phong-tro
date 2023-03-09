@@ -15,7 +15,7 @@ const Intro = () => {
     const { categories } = useAppSelector(state => state.app)
 
     return (
-        <div className='w-4/5 bg-white rounded-md mt-10 shadow-md p-10 gap-4 flex-col flex justify-center items-center'>
+        <div className='w-1100 bg-white rounded-md mt-10 shadow-md p-10 gap-4 flex-col flex justify-center items-center'>
             <h3 className='font-bold text-lg'>{text.title}</h3>
             <p className='text-gray-800 text-center my-4'>
                 {text.description}
@@ -57,14 +57,13 @@ const Intro = () => {
             <p className='text-gray-600 italic text-center'>{text.comment}</p>
             <span className='text-gray-700'>{text.author}</span>
             <h3 className='font-bold text-lg py-2'>{text.question}</h3>
-            <p>{text.answer}</p>
+            <p className='mb-4' >{text.answer}</p>
             <Button
                 text='Đăng tin ngay'
                 bgColor='bg-secondary2'
                 textColor='text-white'
                 px='px-6'
             />
-            <div className='h-12'></div>
         </div>
     )
 }

@@ -29,6 +29,7 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
     const dispatch = useAppDispatch()
     const [searchParams]:any= useSearchParams()
     const posts:IPosts = useAppSelector(state => state.post.posts) as IPosts
+    const {isLoading} = useAppSelector(state => state.post)
     useEffect(() => {
         let params = []
         for (let entry of searchParams.entries()) {
@@ -46,7 +47,7 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
         dispatch(getPostLimit(searchParamsObject))
     }, [searchParams, categoryCode])
 
-    const {isLoading} = useAppSelector(state => state.post)
+  
     
     return (
         <div className='w-full bg-white shadow-md rounded-md'>

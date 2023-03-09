@@ -5,6 +5,7 @@ import appService from './appService'
 
 const initState:Iapp = {
     msg: '',
+    isLoading:true,
     categories: [],
     prices: [],
     areas: [],
@@ -53,21 +54,40 @@ export const appSlice = createSlice({
     reducers:{},
     extraReducers:(builder) =>{
         builder
+        .addCase(getCategories.pending,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
+            state.isLoading = true;
+        })
         .addCase(getCategories.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
             state.msg = action.payload.msg;
-            state.categories = action.payload.response
+            state.categories = action.payload.response;
+            state.isLoading = false;
         })
+
         .addCase(apiGetPrices.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
             state.msg = action.payload.msg;
-            state.prices = action.payload.response
+            state.prices = action.payload.response;
+            state.isLoading = false;
         })
+        .addCase(apiGetPrices.pending,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
+            state.isLoading = true;
+        })
+
         .addCase(apiGetAreas.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
             state.msg = action.payload.msg;
-            state.areas = action.payload.response
+            state.areas = action.payload.response;
+            state.isLoading = false;
         })
+        .addCase(apiGetAreas.pending,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
+            state.isLoading = true;
+        })
+
         .addCase(apiGetProvinces.fulfilled,(state:Iapp,action:PayloadAction<IAppPayload>)=>{
             state.msg = action.payload.msg;
-            state.provinces = action.payload.response
+            state.provinces = action.payload.response;
+            state.isLoading = false;
+        })
+        .addCase(apiGetProvinces.pending,(state:Iapp)=>{
+            state.isLoading = true;
         })
     },
 })

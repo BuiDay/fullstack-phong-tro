@@ -11,11 +11,15 @@ interface Icate{
     value?:string,
 }
 
-const Navigation = () => {
+interface IProps{
+    isAdmin?:boolean
+}
+
+const Navigation:React.FC<IProps> = ({ isAdmin }) => {
     const categories  = useAppSelector((state:RootState) => state.app.categories)
     return (
-        <div className='w-full h-[40px] bg-secondary flex items-center text-white'>
-            <div className='w-1100 h-full m-auto items-center flex text-sm font-medium'>
+        <div className={`w-full ${isAdmin ? 'justify-start' : 'justify-center'} h-[40px] bg-secondary flex items-center text-white`}>
+            <div className='w-1100 h-full items-center flex text-sm font-medium'>
                     <div className='h-full'>
                         <NavLink
                             style={{display:"block", height:"100%",padding:"0 12px",lineHeight:"40px"}}

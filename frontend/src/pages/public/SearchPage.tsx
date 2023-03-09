@@ -8,26 +8,24 @@ import { List } from '../../components';
 import Pagination from '../../components/Pagination/Pagination';
 import ItemSidebar from '../../components/ItemSidebar/ItemSidebar';
 import NewPost from '../../components/NewPost/NewPost';
+import { useLocation } from 'react-router-dom';
 
-interface IProps{
-    id?:number
-}
-const Rental:React.FC<IProps> = ({id}) => {
-    const {categories,areas,prices,isLoading} = useAppSelector((state:RootState) => state.app)
-    console.log(categories,areas,prices)
+
+const SearchPage = () => {
+    const {categories,areas,prices} = useAppSelector((state:RootState) => state.app)
+    const location = useLocation()
     return (
         <div className='w-full flex gap-4'>
         <div className='w-full flex flex-col gap-3'>
             <Search/>
-            {isLoading ? "" : <>
             <div>
-                <h1 className='text-[28px] font-bold' >{categories && id ? categories[id-1].header : ""}</h1>
-                <p className='text-base text-gray-700'>{categories && id &&  categories[id-1].subheader}</p>
+                <h1 className='text-[28px] font-bold' >{location.state?.titleSearch || 'Kết quả tìm kiếm'}</h1>
+                <p className='text-base text-gray-700'>{`${location.state?.titleSearch || ''} phòng mới xây, chính chủ gần chợ, trường học, siêu thị, cửa hàng tiện lợi, khu an ninh.`}</p>
             </div>
             <Province />
             <div className='w-full flex gap-4'>
                 <div className='w-[70%] rounded-xl overflow-hidden'>
-                    <List categoryCode={categories && id &&  categories[id-1].code}/>
+                    <List/>
                     <Pagination />
                 </div>
                 <div className='w-[30%] flex flex-col gap-4 justify-start items-center'>
@@ -37,10 +35,9 @@ const Rental:React.FC<IProps> = ({id}) => {
                     <NewPost />
                 </div>
             </div>
-            </>}
         </div>
     </div>
     );
 };
 
-export default Rental;
+export default SearchPage;
