@@ -44,6 +44,7 @@ export const authSlice = createSlice({
         builder
         .addCase(register.pending,(state:IAuth)=>{
             state.isLoading = true;
+            
         })
         .addCase(register.fulfilled,(state:IAuth,action:PayloadAction<IAuth>)=>{
             state.isLoading = false;
@@ -78,7 +79,6 @@ export const authSlice = createSlice({
             state.token = action.payload.token;
         })
       
-
         .addCase(logout.fulfilled,(state:IAuth)=>{
             state.isLoading = false;
             state.isSuccess = true;

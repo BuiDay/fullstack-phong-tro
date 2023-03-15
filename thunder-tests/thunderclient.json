@@ -192,5 +192,24 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "d7e19dfc-aa52-46b9-b5c9-8d3ad40111eb",
+    "colId": "b0abac8a-bd62-40f5-83cd-b43fcd11a906",
+    "containerId": "",
+    "name": "Create post",
+    "url": "http://localhost:8000/api/v1/post/create-post",
+    "method": "POST",
+    "sortNum": 60000,
+    "created": "2023-03-10T10:37:19.700Z",
+    "modified": "2023-03-10T10:38:59.992Z",
+    "headers": [
+      {
+        "name": "Authorization",
+        "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZjYxOWJmLTJlZTItNDNjZC04ZjdhLTU1YTJlODZiOWQzMSIsInBob25lIjoiMDkzMzgwNDc4NSIsImlhdCI6MTY3ODQ0NDY5NCwiZXhwIjoxNjc4NTMxMDk0fQ.wHIfdA-QX_AfVpRvez_ECbNPKJORXvXKBGXuwL4soJE"
+      }
+    ],
+    "params": [],
+    "tests": []
   }
 ]

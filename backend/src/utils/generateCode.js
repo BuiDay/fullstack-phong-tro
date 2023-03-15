@@ -2,11 +2,7 @@ require('dotenv').config()
 
 const generateCode = (value) => {
     let output = ''
-    value = value
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .split(" ")
-        .join("")
+    value = value.toString().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(" ").join("")
     let merge = value + process.env.phongtro123
     let length = merge.length
     // adc + phongtro123 = adcphongtro123

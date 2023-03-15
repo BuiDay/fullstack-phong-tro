@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, memo } from 'react'
-import { IPayload } from '../../pages/system/CreatePost'
 
 interface IProps{
     label?:string,

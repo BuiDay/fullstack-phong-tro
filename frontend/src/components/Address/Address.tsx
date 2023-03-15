@@ -2,12 +2,12 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { apiGetPublicDistrict, apiGetPublicProvinces } from '../../store/features/app/appService';
 import Select from '../Select/Select';
 import InputReadOnly from './InputReadOnly';
-import { IPayload } from '../../pages/system/CreatePost';
+import { IPayloadPost } from '../../pages/system/CreatePost';
 
 
 interface IProps{
     payload?:any,
-    setPayload:Dispatch<SetStateAction<IPayload>>
+    setPayload:Dispatch<SetStateAction<IPayloadPost>>
 }
 
 

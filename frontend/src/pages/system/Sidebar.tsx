@@ -6,8 +6,8 @@ import { logout } from '../../store/features/auth/authSilce';
 
 const { ImPencil2, MdOutlineLibraryBooks, BiUserPin,AiOutlineLogout } = icons
 
-const activeStyle = 'hover:bg-gray-200 flex  rounded-md items-center gap-2 py-2 font-bold bg-gray-200 px-4'
-const notActiceStyle = 'hover:bg-gray-200 flex  rounded-md items-center gap-2 py-2 cursor-pointer px-4'
+const activeStyle = 'hover:bg-white flex items-center gap-2 py-2 font-bold bg-white px-4'
+const notActiceStyle = 'hover:bg-white flex items-center gap-2 py-2 cursor-pointer px-4'
 
 const Sidebar = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const Sidebar = () => {
         },1000)
     }
     return (
-    <div className='w-[256px] h-full flex-none flex flex-col gap-6'>
+    <div className='w-[256px] h-screen fixed flex-none flex flex-col gap-1 bg-[#f3f3f3]'>
         <div className='flex flex-col gap-4 p-4'>
             <div className='flex items-center gap-4'>
                 <img src={require("../../asset/images/anon-avatar.png")} alt="avatar" className='w-12 h-12 object-cover rounded-full border-2 border-white' />

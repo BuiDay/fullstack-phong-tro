@@ -44,8 +44,36 @@ export const getNewPosts = async (req, res) => {
 
 export const createPosts = async (req, res) => {
     try {
-        const {id} = req.user 
+        const {id} = req.user
+        const {title,description} = req.body
+        if(!title || !description){
+            return res.status(400).json({
+                err: -1,
+                msg: 'Miss input'
+            })
+        }
         const response = await postService.postCreatePostService(req.body,id)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at post controller: ' + error
+        })
+    }
+}
+
+export const getPostsAdmin = async (req, res) => {
+    try {
+        const {page,...query} = req.query
+        const {id} = req.user
+        if(!id){
+            return res.status(400).json({
+                err: -1,
+                msg: 'Miss input'
+            })
+        }
+        const response = await postService.getPostsAdmin(page,id,query)
         return res.status(200).json(response)
 
     } catch (error) {

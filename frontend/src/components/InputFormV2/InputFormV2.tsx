@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { number } from 'yargs'
-import { IPayload } from '../../pages/system/CreatePost'
+import { IPayloadPost } from '../../pages/system/CreatePost'
 
 interface IProps{
     label?:string,
     unit?:string, 
     value?:string, 
-    setValue:Dispatch<SetStateAction<IPayload>>, 
+    setValue:Dispatch<SetStateAction<IPayloadPost>>, 
     name:string, 
     small?:string, 
 }

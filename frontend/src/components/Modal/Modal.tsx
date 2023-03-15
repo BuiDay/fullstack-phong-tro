@@ -49,13 +49,11 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
                         setPersent2(100)
                     }
                 }else{
-                    if(Number(arrMaxMin[0].splice(0))===90) {
-                        console.log(1)
+                    if(arrMaxMin[0]===90) {
                         setPersent1(100)
                         setPersent2(100)
                     }
                     else {
-                        console.log(2)
                         setPersent1(0)
                         setPersent2(convertto100(20))
                     }

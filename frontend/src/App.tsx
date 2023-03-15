@@ -10,6 +10,7 @@ import { apiGetCurrent } from './store/features/user/userSilce';
 import SearchPage from './pages/public/SearchPage';
 import System from './pages/system/System';
 import CreatePost from './pages/system/CreatePost';
+import ManagePost from './pages/system/ManagePost';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ function App() {
         </Route>
         <Route path={path.SYSTEM} element={<System />} >
           <Route path={path.CREATE_POST} element={<CreatePost />} />
+          <Route path={path.MANAGE_POST} element={<ManagePost />} />
         </Route>
       </Routes>
   </div>

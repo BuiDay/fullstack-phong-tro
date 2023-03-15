@@ -10,6 +10,6 @@ router.get('/new-post', postController.getNewPosts)
 
 router.use(verifyToken)
 router.post('/create-post', postController.createPosts)
-
+router.post('/get-post-admin', postController.getPostsAdmin)
 
 export default router

@@ -2,6 +2,7 @@ import db from '../models'
 const { Op } = require("sequelize");
 import { v4 } from 'uuid'
 import generateCode from '../utils/generateCode'
+import generateDate from '../utils/generateDate'
 import moment from 'moment'
 
 export const getPostsService = () => new Promise(async (resolve, reject) => {
@@ -28,18 +29,16 @@ export const getPostsService = () => new Promise(async (resolve, reject) => {
 })
 
 export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) => new Promise(async (resolve, reject) => {
-    console.log(priceNumber)
     try {
         let offset = (!page || +page <= 1) ? 0 : (+page - 1)
         const queries = { ...query }
      
         if (priceNumber) queries.priceNumber = { [Op.between]: priceNumber }
-        if (areaNumber) queries.areaNumber = { [Op.between]: areaNumber }
-        console.log(queries)
         const response = await db.Post.findAndCountAll({
             where: queries,
             raw: true,
             nest: true,
+            order: [['createdAt', 'DESC']],
             offset: offset * +process.env.LIMIT,
             limit: +process.env.LIMIT,
             include: [
@@ -91,10 +90,9 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
     let attributesId = v4()
     let imagesId = v4()
     let overviewId = v4()
-    let userId = userId
-    let labelCode = generateCode(body.label).trim()
+    let labelCode = generateCode(body.label) 
     let hashtag = Math.floor(Math.random()*Math.pow(10*6))
-    let currentDate = new Date()
+    let currentDate = generateDate()
 
     try {
         await db.Post.create({
@@ -104,15 +102,15 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             address: body.address || null,
             attributesId,
             categoryCode: body.categoryCode,
-            description: body.description || null,
+            description: JSON.stringify(body.description) || null,
             userId,
             overviewId,
             imagesId,
             areaCode: body.areaCode,
             priceCode: body.priceCode,
-            provinceCode:body.provinceCode,
+            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")) || null,
             priceNumber: body.priceNumber,
-            areaNumber: body.areaNumber
+            areaNumber: `${body.areaNumber}m2`
         })
 
         await db.Attribute.create({
@@ -136,19 +134,20 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             type: body.category,
             target: body.target,
             bonus: "Tin thường",
-            created: currentDate,
-            expired: currentDate.setDate(currentDate.getDate()+10),
+            created: currentDate.today,
+            expired: currentDate.expireDay
         })
+
         await db.Province.findOrCreate({
             where:{
                 [Op.or]:[
-                    {vaule:body?.province?.replace("Thành phố ","")},
-                    {vaule:body?.province?.replace("Tỉnh ","")}
+                    {value:body?.province?.replace("Thành phố ","")},
+                    {value:body?.province?.replace("Tỉnh ","")}
                 ]
             },
-            default:{
+            defaults:{
                 code:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")),
-                vaule: body?.province.includes("Thành phố") ? body?.province.includes("Thành phố") : body?.province.includes("Tỉnh"),
+                value: body?.province.includes("Thành phố") ? body?.province.includes("Thành phố") : body?.province.includes("Tỉnh"),
             }
         })
 
@@ -156,14 +155,44 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             where:{
                 code:labelCode
             },
-            default:{
+            defaults:{
                 code:labelCode,
                 body:body.label
             }
         })
         resolve({
             err: 0,
-            msg: 'Create posts is failed.',
+            msg: 'Create posts is success.',
+        })
+
+    } catch (error) {
+        reject(error)
+    }
+})
+
+
+export const getPostsAdmin = (page,id,query) => new Promise(async (resolve, reject) => {
+    try {
+        let offset = (!page || +page <= 1) ? 0 : (+page - 1)
+        const queries = { ...query,userId:id }
+        const response = await db.Post.findAndCountAll({
+            where: queries,
+            raw: true,
+            nest: true,
+            offset: offset * +process.env.LIMIT,
+            limit: +process.env.LIMIT,
+            include: [
+                { model: db.Image, as: 'images', attributes: ['image'] },
+                { model: db.Attribute, as: 'attributes', attributes: ['price', 'acreage', 'published', 'hashtag'] },
+                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                { model: db.Overview, as: 'overviews', attributes: ['area', 'type', 'target','bonus','created','expired'] },
+            ],
+            attributes: ['id', 'title', 'star', 'address', 'description']
+        })
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Getting posts is failed.',
+            response
         })
 
     } catch (error) {

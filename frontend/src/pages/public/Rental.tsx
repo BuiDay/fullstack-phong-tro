@@ -14,7 +14,6 @@ interface IProps{
 }
 const Rental:React.FC<IProps> = ({id}) => {
     const {categories,areas,prices,isLoading} = useAppSelector((state:RootState) => state.app)
-    console.log(categories,areas,prices)
     return (
         <div className='w-full flex gap-4'>
         <div className='w-full flex flex-col gap-3'>

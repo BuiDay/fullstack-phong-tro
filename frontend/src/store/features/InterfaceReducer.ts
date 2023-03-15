@@ -30,10 +30,12 @@ export interface IAuthLogin{
 
 export interface IPost{
   posts?: any[],
+  postsAdmin?: any[],
   msg?:string,
   count?:number,
   newPosts?: any[],
-  isLoading?:boolean
+  isLoading?:boolean,
+  isSuccess?:boolean
 }
 
 export interface IPostPayload{
@@ -59,9 +61,8 @@ export interface IUser{
     fbUrl?:string,
     avatar?:string,
   }
+  error?:string,
 }
-
-
 
 export interface IUserPayload{
   err:string,

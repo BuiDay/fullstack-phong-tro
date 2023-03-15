@@ -51,8 +51,6 @@ const Login = () => {
             }
         }
     }
-    console.log(authState)
-    console.log(authState.isLoggedIn)
 
     useEffect(()=>{
         if(authState.isLoggedIn){

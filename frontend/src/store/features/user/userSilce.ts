@@ -1,9 +1,13 @@
 import { createSlice, createAsyncThunk, createAction, PayloadAction} from "@reduxjs/toolkit"
 import userService from "./userService";
 import {IUser, IUserPayload } from "../InterfaceReducer";
+import { useAppDispatch } from "../../hook";
+import { logout } from "../auth/authSilce";
+
 
 const initState:IUser = {
-    currentData: {}
+    currentData: {},
+    error:"",
 }
 
 export const apiGetCurrent:any = createAsyncThunk("user",async(data:any,thunkAPI)  =>{
@@ -27,7 +31,11 @@ export const userSlice = createSlice({
         .addCase(apiGetCurrent.fulfilled,(state:IUser,action:PayloadAction<IUserPayload>)=>{
             state.currentData = action.payload.response;
         })
-
+        .addCase(apiGetCurrent.rejected,(state:IUser,action:PayloadAction<any>)=>{
+            state.currentData = {}
+            console.log(action.payload)
+            state.error = action.payload.err
+        })
     },
 })
 

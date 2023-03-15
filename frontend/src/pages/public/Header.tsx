@@ -12,7 +12,7 @@ const { ImPencil2, MdOutlineLibraryBooks, BiUserPin,AiOutlineLogout } = icons
 const Header= () => {
     const dispatch = useAppDispatch();
     const {isLoggedIn} = useAppSelector(state=>state.auth);
-    const {currentData} = useAppSelector(state => state.user);
+    const {currentData,error} = useAppSelector(state => state.user);
     const [isShowMenu, setIsShowMenu] = useState(false)
     const refBtn = useRef<any>(null)
     const handleLogout = ():void =>{
@@ -27,6 +27,12 @@ const Header= () => {
             // }
         }
     }
+
+    useEffect(()=>{
+        if(error?.toString()==="1"){
+            dispatch(logout())
+        }
+    },[])
 
     useEffect(()=>{
        if(isShowMenu){
