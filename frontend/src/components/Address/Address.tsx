@@ -61,6 +61,8 @@ const Address:React.FC<IProps> = ({payload,setPayload}) => {
         }))
 
     }, [province, district])
+
+    console.log(provinces?.find(item => item.province_id === province)?.province_name?.replace("Thành phố ",""))
     
     return (
         <div>

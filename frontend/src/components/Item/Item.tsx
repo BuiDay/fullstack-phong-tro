@@ -52,11 +52,14 @@ const Item:React.FC<IPost> = ({ images, user, title, star, description, attribut
                         <BsBookmarkStarFill size={24} color='orange' />
                     </div>
                 </div>
-                <div className='my-2 flex items-center justify-between gap-2'>
-                    <span className='font-bold flex-3 text-green-600  whitespace-nowrap overflow-hidden text-ellipsis'>{attributes?.price}</span>
-                    <span className='flex-1'>{attributes?.acreage}</span>
+                <div className='my-2 flex flex-col justify-between gap-2'>
+                    <div className='flex items-center justify-between'>
+                        <span className='font-bold text-green-600 whitespace-nowrap overflow-hidden text-ellipsis'>{attributes?.price}</span>
+                        <span >Diện tích: {attributes?.acreage}</span>
+                    </div>
+                    
                     <span className='flex-3 whitespace-nowrap overflow-hidden text-ellipsis'>
-                        {` ${address && address.split(',')[address.split(',').length - 2]}${address && address.split(',')[address.split(',').length - 1]}`}
+                        {` ${address && address.split(',')[address.split(',').length - 2]}, ${address && address.split(',')[address.split(',').length - 1]}`}
                     </span>
                 </div>
                 <p className='text-gray-500 w-full h-[50px] text-ellipsis overflow-hidden' style={{display:"-webkit-box", WebkitLineClamp: "2",WebkitBoxOrient:"vertical",whiteSpace:"pre-wrap"}}>

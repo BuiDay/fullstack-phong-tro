@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export interface IPayloadPost{
     userId?:string,
     categoryCode: string,
+    category:string,
     title: string,
     priceNumber: number,
     areaNumber: number,
@@ -30,6 +31,7 @@ const { BsCameraFill, ImBin } = icons
 const CreatePost = () => {
     const [payload, setPayload] = useState<IPayloadPost>({
         categoryCode: '',
+        category:" ",
         title: '',
         priceNumber: 0,
         areaNumber: 0,
@@ -69,6 +71,7 @@ const CreatePost = () => {
             images: prev.images?.filter(item => item !== image)
         }))
     }
+
     
     const handleSubmit = async () => {
         let priceCodeArr = getCodes(+payload.priceNumber / Math.pow(10,6), prices, 1, 15)
@@ -78,10 +81,12 @@ const CreatePost = () => {
 
         let finalPayload = {
             ...payload,
+            category:`${categories?.find(item=>item.code === payload.categoryCode)?.value}`,
             priceCode,
             areaCode,
             userId:currentData.id,
             priceNumber: +payload.priceNumber / Math.pow(10,6),
+            areaNumber:Number(payload.areaNumber),
             label:`${categories?.find(item=>item.code === payload.categoryCode)?.value} ${payload?.address.split(',')[0]}`
         }
         console.log(finalPayload);
@@ -96,6 +101,7 @@ const CreatePost = () => {
                  setImagesPreview([])
                  setPayload({
                     categoryCode: '',
+                    category:"",
                     title: '',
                     priceNumber: 0,
                     areaNumber: 0,

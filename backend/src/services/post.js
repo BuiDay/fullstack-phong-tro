@@ -91,7 +91,7 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
     let imagesId = v4()
     let overviewId = v4()
     let labelCode = generateCode(body.label) 
-    let hashtag = Math.floor(Math.random()*Math.pow(10*6))
+    let hashtag = Math.floor(Math.random()*Math.pow(10,6))
     let currentDate = generateDate()
 
     try {
@@ -99,7 +99,7 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             id: postId,
             title: body.title,
             labelCode,
-            address: body.address || null,
+            address: `Địa chỉ: ${body.address}`,
             attributesId,
             categoryCode: body.categoryCode,
             description: JSON.stringify(body.description) || null,
@@ -108,18 +108,17 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             imagesId,
             areaCode: body.areaCode,
             priceCode: body.priceCode,
-            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")) || null,
+            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.replace("Thành phố ","")) : generateCode(body?.province.replace("Tỉnh ","")) || null,
             priceNumber: body.priceNumber,
-            areaNumber: `${body.areaNumber}m2`
+            areaNumber: `${body.areaNumber}`
         })
 
         await db.Attribute.create({
             id: attributesId,
             price: +body.priceNumber < 1 ? `${+body.priceNumber * 1000000} đồng/tháng` : `${+body.priceNumber} triệu/tháng`,
-            acreage: body.areaNumber,
+            acreage: `${body.areaNumber}m2`,
             published: moment(new Date).format("DD/MM/YYYY") ,
-            hashtag:`#${hashtag}`
-
+            hashtag:hashtag
         })
 
         await db.Image.create({
@@ -129,15 +128,14 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
 
         await db.Overview.create({
             id: overviewId,
-            code: hashtag,
-            area: body.label,
+            code: `#${hashtag}`,
+            area: `${body.label}`,
             type: body.category,
             target: body.target,
             bonus: "Tin thường",
             created: currentDate.today,
             expired: currentDate.expireDay
         })
-
         await db.Province.findOrCreate({
             where:{
                 [Op.or]:[
@@ -146,8 +144,8 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
                 ]
             },
             defaults:{
-                code:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")),
-                value: body?.province.includes("Thành phố") ? body?.province.includes("Thành phố") : body?.province.includes("Tỉnh"),
+                code:body?.province.includes("Thành phố") ? generateCode(body?.province.replace("Thành phố ","")) : generateCode(body?.province.replace("Tỉnh ","")),
+                value: body?.province.includes("Thành phố") ? body?.province.replace("Thành phố ","") : body?.province.replace("Tỉnh ",""),
             }
         })
 
@@ -157,7 +155,7 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
             },
             defaults:{
                 code:labelCode,
-                body:body.label
+                value:body.label
             }
         })
         resolve({
@@ -213,7 +211,7 @@ export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body})
             priceCode: body.priceCode,
             provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")) || null,
             priceNumber: body.priceNumber,
-            areaNumber: `${body.areaNumber}m2`
+            areaNumber: `${body.areaNumber}`
         },{
             where:{id:postId}
         })

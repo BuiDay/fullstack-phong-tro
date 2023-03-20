@@ -6,9 +6,10 @@ interface IinputForm {
     setVaule?:any,
     value?:string | number,
     typeParams?:any,
+    onKeyDown?:any
 }
 
-const InputForm:React.FC<IinputForm> = ({label,type,setVaule,value,typeParams}) => {
+const InputForm:React.FC<IinputForm> = ({label,type,setVaule,value,typeParams,onKeyDown}) => {
     return (
         <>
         <div>
@@ -17,6 +18,7 @@ const InputForm:React.FC<IinputForm> = ({label,type,setVaule,value,typeParams}) 
                     className='outline-none bg-[#e8f0fe] p-2 rounded-md w-full'
                     value={value}
                     onChange={(e)=>(setVaule((prev: any)=>({...prev,[typeParams]:e.target.value})))}
+                    onKeyDown={onKeyDown}
             />
         </div>
         </>

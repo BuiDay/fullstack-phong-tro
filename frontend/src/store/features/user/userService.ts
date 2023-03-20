@@ -5,7 +5,7 @@ export const apiGetCurrent = () => new Promise(async (resolve, reject) => {
             method: 'get',
             url: '/api/v1/user/get-current',
         })
-   
+
         if(response.data.err === 1)
         {
             reject(response.data)

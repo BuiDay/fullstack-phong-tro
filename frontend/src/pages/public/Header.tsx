@@ -18,7 +18,7 @@ const Header= () => {
     const handleLogout = ():void =>{
         dispatch(logout())
     }
-
+    console.log(isLoggedIn)
     const handleDropdown = (e:any) =>{
         if(refBtn.current){
             setIsShowMenu(refBtn.current.contains(e.target))
@@ -32,7 +32,7 @@ const Header= () => {
         if(error?.toString()==="1"){
             dispatch(logout())
         }
-    },[])
+    },[error])
 
     useEffect(()=>{
        if(isShowMenu){

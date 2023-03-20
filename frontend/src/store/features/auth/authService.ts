@@ -20,6 +20,7 @@ const apiLogin =  (data:IAuthLogin) => new Promise(async(resolve, reject)=>{
             url:'/api/v1/auth/login',
             data:data
         })
+        console.log(res.data.err)
         if(res.data.err === -1)
         {
             reject(res.data)

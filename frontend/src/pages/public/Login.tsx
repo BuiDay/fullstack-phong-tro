@@ -23,7 +23,7 @@ const Login = () => {
         phone:"",
         password:""
     })
-    
+  
     const handlError = (text:string) =>{
         if(text === "Password is wrong!") return "Mật khẩu không đúng!"
         if(text === "Phone number is not found!") return "Không tìm thấy số điện thoại!"
@@ -52,22 +52,28 @@ const Login = () => {
         }
     }
 
+    const handleOnKeyDown = (e:any) =>{
+        if(e.keyCode===13){
+            handleSubmit()
+        }
+    }
+
     useEffect(()=>{
         if(authState.isLoggedIn){
             navigate("/")
         }
     },[authState.isLoggedIn])
-
+    console.log(authState.isLoggedIn)
     return (
         <div className='bg-white w-[600px] mt-10 p-[30px] pb-[100px] rounded-md shadow-sm'>
             <h3 className='font-semibold text-2xl mb-3'>Đăng nhập</h3>
             <div className='flex flex-col gap-3 w-full'>
                 <div>
-                    <InputForm label={"Số điện thoại"} type={"text"} value={params.phone} setVaule={setParams} typeParams='phone'/>
+                    <InputForm label={"Số điện thoại"} type={"text"} value={params.phone} setVaule={setParams} typeParams='phone' onKeyDown={(e:any)=>handleOnKeyDown(e)}/>
                     <div className='text-[red] text-sm'>{validate.phone}</div>
                 </div>
                 <div>
-                    <InputForm label={"Mật khẩu"} type={"password"} value={params.password} setVaule={setParams} typeParams='password'/>
+                    <InputForm label={"Mật khẩu"} type={"password"} value={params.password} setVaule={setParams} typeParams='password' onKeyDown={(e:any)=>handleOnKeyDown(e)}/>
                     <div className='text-[red] text-sm'>{validate.password}</div>
                 </div>
                 <Button 

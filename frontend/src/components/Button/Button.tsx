@@ -19,6 +19,7 @@ const Button:React.FC<IPropsButton> = ({text, bgColor, textColor,icon,onClick,fu
         <button type="button" 
             className={`${py? py :"py-2"} ${px ? px :"px-4"} ${bgColor} ${fullWidth && "w-full"} ${textColor} outline-none rounded-md hover:underline justify-center flex items-center gap-1`} 
             onClick={onClick}
+            
             >
             <Link to={link}>{text}</Link> 
             {
@@ -27,5 +28,4 @@ const Button:React.FC<IPropsButton> = ({text, bgColor, textColor,icon,onClick,fu
         </button>
     );
 };
-
 export default memo(Button);

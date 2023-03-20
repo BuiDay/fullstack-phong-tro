@@ -33,8 +33,7 @@ export const userSlice = createSlice({
         })
         .addCase(apiGetCurrent.rejected,(state:IUser,action:PayloadAction<any>)=>{
             state.currentData = {}
-            console.log(action.payload)
-            state.error = action.payload.err
+            state.error = action.payload.response.data.err
         })
     },
 })
