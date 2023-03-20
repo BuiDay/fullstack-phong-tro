@@ -8,8 +8,8 @@ router.get('/all', postController.getPosts)
 router.get('/limit', postController.getPostsLimit)
 router.get('/new-post', postController.getNewPosts)
 
-router.use(verifyToken)
-router.post('/create-post', postController.createPosts)
-router.post('/get-post-admin', postController.getPostsAdmin)
+router.post('/create-post', verifyToken,postController.createPosts)
+router.post('/get-post-admin',verifyToken, postController.getPostsAdmin)
+router.post('/update-post-admin',verifyToken, postController.putPostsAdmin)
 
 export default router

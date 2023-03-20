@@ -199,3 +199,76 @@ export const getPostsAdmin = (page,id,query) => new Promise(async (resolve, reje
         reject(error)
     }
 })
+
+export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body}) => new Promise(async (resolve, reject) => {
+    try {
+        let labelCode = generateCode(body.label) 
+        await db.Post.update({
+            title: body.title,
+            labelCode,
+            address: body.address || null,
+            categoryCode: body.categoryCode,
+            description: JSON.stringify(body.description) || null,
+            areaCode: body.areaCode,
+            priceCode: body.priceCode,
+            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")) || null,
+            priceNumber: body.priceNumber,
+            areaNumber: `${body.areaNumber}m2`
+        },{
+            where:{id:postId}
+        })
+
+        await db.Attribute.update({
+            price: +body.priceNumber < 1 ? `${+body.priceNumber * 1000000} đồng/tháng` : `${+body.priceNumber} triệu/tháng`,
+            acreage: body.areaNumber,
+        },{
+            where:{id:attributesId}
+        })
+
+        await db.Image.update({
+            image: JSON.stringify(body.images)
+        },{
+            where:{id:imagesId}
+        })
+
+        await db.Overview.update({
+            area: body.label,
+            type: body.category,
+            target: body.target,
+        },{
+            where:{id:overviewId}
+        })
+
+        await db.Province.findOrCreate({
+            where:{
+                [Op.or]:[
+                    {value:body?.province?.replace("Thành phố ","")},
+                    {value:body?.province?.replace("Tỉnh ","")}
+                ]
+            },
+            defaults:{
+                code:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")),
+                value: body?.province.includes("Thành phố") ? body?.province.includes("Thành phố") : body?.province.includes("Tỉnh"),
+            }
+        })
+
+        await db.Label.findOrCreate({
+            where:{
+                code:labelCode
+            },
+            defaults:{
+                code:labelCode,
+                body:body.label
+            }
+        })
+
+        resolve({
+            err: 0,
+            msg: 'Updated',
+            response
+        })
+
+    } catch (error) {
+        reject(error)
+    }
+})
