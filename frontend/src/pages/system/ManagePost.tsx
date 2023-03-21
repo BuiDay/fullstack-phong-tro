@@ -4,6 +4,7 @@ import { getPostAdmin } from '../../store/features/post/postSilce';
 import moment from 'moment';
 import { Button } from '../../components';
 import ModalUpdatePost from '../../components/ModalUpdatePost/ModalUpdatePost';
+import ModalConfirm from '../../components/ModalConfirm/ModalConfirm';
 
 export interface IEditPost{
     id?:string,
@@ -31,6 +32,7 @@ export interface IEditPost{
 const ManagePost = () => {
     const dispatch = useAppDispatch()
     const [isShowModal, setIsShowModal] = useState(false)
+    const [isShowModalConfirm, setIsShowModalConfirm] = useState(false)
     const [postEdit, setPostEdit] = useState<IEditPost>()
     const {postsAdmin} = useAppSelector(state=>state.post)
     useEffect(()=>{
@@ -50,15 +52,20 @@ const ManagePost = () => {
         setIsShowModal(true)
     }
 
+    const handleShowConfirm= (e:IEditPost) => {
+        setPostEdit(e)
+        setIsShowModalConfirm(true)
+    }
+
     return (
-        <>
-            <div className='py-4 border-b border-gray-200 flex items-center justify-between'>
-                <h1 className='text-3xl font-medium'>Quản lý tin đăng</h1>
+        <div className='px-6'>
+            <div className='border-b border-gray-200 flex items-center justify-between'>
+                <h1 className='text-3xl font-medium py-4'>Quản lý tin đăng</h1>
                 <select name="" id="" className='outline-none border p-2 border-gray-200 rounded-md'>
                     <option value="">Lọc theo trạng thái</option>
                 </select>
             </div>
-            <table className='w-full'>
+            <table className='w-full mt-5 border'>
                 <thead>
                     <tr>
                         <th className='py-3 border'>Mã tin</th>
@@ -78,15 +85,17 @@ const ManagePost = () => {
                                 <>
                                     <tr key={index} className='text-sm text-center'>
                                         <td className='py-1 border'>#{item.id.split("-")[0]}</td>
-                                        <td className='flex justify-center py-1 border'><img className='h-[70px]' src={JSON.parse(item.images.image)[0]} alt="" /></td>
+                                        <td className='py-1 border'>
+                                            <img className='h-[70px] m-auto' src={JSON.parse(item.images.image)[0]} alt="" />
+                                        </td>
                                         <td className='text-left py-1 px-3 border'>{item.title}</td>
                                         <td className='py-1 border'>{item.attributes.price}</td>
                                         <td className='py-1 border'>{item.overviews.created}</td>
                                         <td className='py-1 border'>{item.overviews.expired}</td>
                                         <td className='py-1 border'>{item.overviews.expired && checkStatus(item.overviews.expired.split(" ")[3]) ? "Đang hoạt động" : "Đã hết hạn"}</td>
-                                        <td className='py-1 border'>
-                                            <Button text="Sửa" textColor="text-white" bgColor = "bg-[#3961fb]" onClick={()=>{handleShow(item)}} />
-                                            <Button text="Xóa" textColor="text-white" bgColor = "bg-[#3961fb]"/>
+                                        <td className='py-1 border flex justify-around items-center h-[78px]'>
+                                            <Button text="Sửa" textColor="text-white" bgColor = "bg-green-500" onClick={()=>{handleShow(item)}} />
+                                            <Button text="Xóa" textColor="text-white" bgColor = "bg-secondary2" onClick={()=>{handleShowConfirm(item)}}/>
                                         </td>
                                     </tr>  
                                 </>
@@ -99,7 +108,12 @@ const ManagePost = () => {
                 setIsShowModal={setIsShowModal} 
                 postEdit = {postEdit}           
             />}
-        </>    
+             {isShowModalConfirm && <ModalConfirm
+                setIsShowModalConfirm={setIsShowModalConfirm} 
+                postEdit = {postEdit}       
+                title = 'Bạn có muốn xóa bài ?'    
+            />}
+        </div>    
     );
 };
 

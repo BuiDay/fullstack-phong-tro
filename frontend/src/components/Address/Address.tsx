@@ -37,7 +37,7 @@ const Address:React.FC<IProps> = ({payload,setPayload,postEdit}) => {
         let address = postEdit?.address;
         if(address){
             let street = address.split(",")[0].replace('Địa chỉ: ','')
-            let province = address.split(',')[2].trim()
+            let province = address.split(',')[2] && address.split(',')[2].trim()
             let findProvineId = provinces.find(item=>item.province_name === province)?.province_id
             setStreet(street)
             setProvince(findProvineId ? findProvineId : " ")

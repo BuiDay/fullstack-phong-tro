@@ -269,3 +269,39 @@ export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body})
         reject(error)
     }
 })
+
+export const deletePostsAdmin = ({postId,overviewId,imagesId,attributesId}) => new Promise(async (resolve, reject) => {
+    try {
+        await db.Post.destroy(
+            {
+                where:{id:postId}
+            }
+        )
+
+        await db.Attribute.destroy(
+            {
+                where:{id:attributesId}
+            }
+        )
+
+        await db.Image.destroy(
+            {
+                where:{id:imagesId}
+            }
+        )
+
+        await db.Overview.destroy(
+            {
+                where:{id:overviewId}
+            }
+        )
+
+        resolve({
+            err: 0,
+            msg: 'Deleted',
+        })
+
+    } catch (error) {
+        reject(error)
+    }
+})

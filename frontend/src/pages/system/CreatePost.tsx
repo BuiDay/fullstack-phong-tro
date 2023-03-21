@@ -54,7 +54,7 @@ const CreatePost:React.FC<IProps> = ({postEdit,setIsShowModal}) => {
         target:  postEdit ? postEdit.overviews?.target : '',
         province: ''
     })
-    
+    console.log(postEdit)
     const [isLoading, setIsLoading] = useState(false)
     const [imagesPreview, setImagesPreview] = useState<string[]>([])
     const { prices, areas,categories } = useAppSelector(state => state.app)

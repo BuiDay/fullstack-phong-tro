@@ -6,7 +6,7 @@ interface IProps{
     label?:string,
     unit?:string, 
     value?:string, 
-    setValue:Dispatch<SetStateAction<IPayloadPost>> | any, 
+    setValue?:Dispatch<SetStateAction<IPayloadPost>> | any, 
     name?:string, 
     small?:string, 
 }

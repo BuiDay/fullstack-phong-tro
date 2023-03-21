@@ -96,8 +96,21 @@ export const apiUpdatePostAdmin =  (data:any) => new Promise(async(resolve, reje
     }
 })
 
+export const apiDeletePostAdmin =  (data:any) => new Promise(async(resolve, reject)=>{
+    try {
+        const res = await axiosConfig({
+            method:"delete",
+            url:'/api/v1/post/delete-post-admin',
+            data:data
+        })
+        resolve(res.data)
+    } catch (error) {
+        reject(error)
+    }
+})
+
 const postService = {
-    apiGetPosts,apiGetPostsLimit,apiGetNewPosts,apiUploadImages,apiCreatePost,apiGetPostAdmin,apiUpdatePostAdmin
+    apiGetPosts,apiGetPostsLimit,apiGetNewPosts,apiUploadImages,apiCreatePost,apiGetPostAdmin,apiUpdatePostAdmin,apiDeletePostAdmin
 }
 
 

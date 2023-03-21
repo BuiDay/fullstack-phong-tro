@@ -63,7 +63,6 @@ const Login = () => {
             navigate("/")
         }
     },[authState.isLoggedIn])
-    console.log(authState.isLoggedIn)
     return (
         <div className='bg-white w-[600px] mt-10 p-[30px] pb-[100px] rounded-md shadow-sm'>
             <h3 className='font-semibold text-2xl mb-3'>Đăng nhập</h3>

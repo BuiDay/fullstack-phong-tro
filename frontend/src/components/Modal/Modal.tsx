@@ -113,7 +113,7 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
                 e.stopPropagation()
                 setIsShowModal(true)
             }}
-            className='w-2/5 h-[500px] bg-white rounded-md relative'
+            className={`w-2/5 h-[500px] bg-white rounded-md relative ${name === 'province' ? "overflow-y-auto": ""}`}
         >
             <div className='h-[45px] px-4 flex items-center border-b border-gray-200'>
                 <span className='cursor-pointer'

@@ -27,7 +27,6 @@ export const getPostsLimit = async (req, res) => {
     }
 }
 
-
 export const getNewPosts = async (req, res) => {
     try {
         const response = await postService.getNewPostService()
@@ -40,7 +39,6 @@ export const getNewPosts = async (req, res) => {
         })
     }
 }
-
 
 export const createPosts = async (req, res) => {
     try {
@@ -95,6 +93,27 @@ export const putPostsAdmin = async (req, res) => {
             })
         }
         const response = await postService.putPostsAdmin(req.body)
+        return res.status(200).json(response)
+
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at post controller: ' + error
+        })
+    }
+}
+
+export const deletePostsAdmin = async (req, res) => {
+    try {
+        const {postId,overviewId,imagesId,attributesId} = req.body
+        const {id} = req.user
+        if(!id){
+            return res.status(400).json({
+                err: -1,
+                msg: 'Missing input'
+            })
+        }
+        const response = await postService.deletePostsAdmin(req.body)
         return res.status(200).json(response)
 
     } catch (error) {
