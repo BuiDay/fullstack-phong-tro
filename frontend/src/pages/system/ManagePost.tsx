@@ -5,22 +5,50 @@ import moment from 'moment';
 import { Button } from '../../components';
 import ModalUpdatePost from '../../components/ModalUpdatePost/ModalUpdatePost';
 
+export interface IEditPost{
+    id?:string,
+    title: string,
+    priceNumber: number,
+    areaNumber: number,
+    images: {image:any},
+    address: string,
+    priceCode: string,
+    areaCode: string,
+    categoryCode:string,
+    description: string,
+    target: string,
+    province: string,
+    label?:string,
+    overviews:{
+        type:string,
+        target:string
+    },
+    attributesId?:string,
+    overviewId?:string,
+    imagesId?:string
+}
+
 const ManagePost = () => {
     const dispatch = useAppDispatch()
     const [isShowModal, setIsShowModal] = useState(false)
+    const [postEdit, setPostEdit] = useState<IEditPost>()
     const {postsAdmin} = useAppSelector(state=>state.post)
     useEffect(()=>{
         dispatch(getPostAdmin())
     },[])
 
+    useEffect(()=>{
+        dispatch(getPostAdmin())
+    },[isShowModal])
+
     const checkStatus  = (datetime:any) => {
       return  moment(datetime.toString(),'DD/MM/YYYY').isAfter(new Date().toDateString())
     };
 
-    const handleShow = () => {
+    const handleShow = (e:IEditPost) => {
+        setPostEdit(e)
         setIsShowModal(true)
     }
-
 
     return (
         <>
@@ -45,10 +73,10 @@ const ManagePost = () => {
                 </thead>
                 <tbody>
                     {
-                       postsAdmin && postsAdmin.length > 0 ? postsAdmin.map((item:any)=>{
+                       postsAdmin && postsAdmin.length > 0 ? postsAdmin.map((item:any,index)=>{
                             return (
                                 <>
-                                    <tr key={item.id} className='text-sm text-center'>
+                                    <tr key={index} className='text-sm text-center'>
                                         <td className='py-1 border'>#{item.id.split("-")[0]}</td>
                                         <td className='flex justify-center py-1 border'><img className='h-[70px]' src={JSON.parse(item.images.image)[0]} alt="" /></td>
                                         <td className='text-left py-1 px-3 border'>{item.title}</td>
@@ -57,18 +85,19 @@ const ManagePost = () => {
                                         <td className='py-1 border'>{item.overviews.expired}</td>
                                         <td className='py-1 border'>{item.overviews.expired && checkStatus(item.overviews.expired.split(" ")[3]) ? "Đang hoạt động" : "Đã hết hạn"}</td>
                                         <td className='py-1 border'>
-                                            <Button text="Sửa" textColor="text-white" bgColor = "bg-[#3961fb]" onClick={handleShow} />
+                                            <Button text="Sửa" textColor="text-white" bgColor = "bg-[#3961fb]" onClick={()=>{handleShow(item)}} />
                                             <Button text="Xóa" textColor="text-white" bgColor = "bg-[#3961fb]"/>
                                         </td>
                                     </tr>  
                                 </>
                             )
-                        }) : <h1 className='mt-5'>Chưa có tin đăng nào</h1>
+                        }) : <tr className='mt-5'><td>Chưa có tin đăng nào</td></tr>
                     }
                 </tbody>
             </table>
             {isShowModal && <ModalUpdatePost
-                setIsShowModal={setIsShowModal}            
+                setIsShowModal={setIsShowModal} 
+                postEdit = {postEdit}           
             />}
         </>    
     );

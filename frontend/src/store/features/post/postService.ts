@@ -83,8 +83,21 @@ export const apiGetPostAdmin =  (query:any) => new Promise(async(resolve, reject
     }
 })
 
+export const apiUpdatePostAdmin =  (data:any) => new Promise(async(resolve, reject)=>{
+    try {
+        const res = await axiosConfig({
+            method:"put",
+            url:'/api/v1/post/update-post-admin',
+            data:data
+        })
+        resolve(res.data)
+    } catch (error) {
+        reject(error)
+    }
+})
+
 const postService = {
-    apiGetPosts,apiGetPostsLimit,apiGetNewPosts,apiUploadImages,apiCreatePost,apiGetPostAdmin
+    apiGetPosts,apiGetPostsLimit,apiGetNewPosts,apiUploadImages,apiCreatePost,apiGetPostAdmin,apiUpdatePostAdmin
 }
 
 

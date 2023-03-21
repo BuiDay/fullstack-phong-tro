@@ -28,6 +28,5 @@ export const getCodes = (entry:any, prices:any,min:number,max:number) => {
 }
 export const getCodesArea = (entry:any, areas:any,min:number,max:number) => {
     const areasWithMinMax = getCodeArea(areas,min,max)
-    console.log(areasWithMinMax)
     return areasWithMinMax.filter((item:any)=>item.min <= entry && item.max > entry)
 }

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,memo } from 'react';
 import Address from '../../components/Address/Address';
 import Overview from '../../components/Overview/Overview';
 import Loading from '../../components/Loading/Loading';
 import icons from '../../utils/icons';
 import { Button } from '../../components';
-import { apiUploadImages } from '../../store/features/post/postService';
+import { apiUpdatePostAdmin, apiUploadImages } from '../../store/features/post/postService';
 import { useAppDispatch, useAppSelector } from '../../store/hook';
 import { getCodes, getCodesArea } from '../../utils/getCodes';
 import { apiCreatePost } from '../../store/features/post/postService';
 import Swal from 'sweetalert2';
+import { IEditPost } from './ManagePost';
 
 export interface IPayloadPost{
     userId?:string,
@@ -25,28 +26,48 @@ export interface IPayloadPost{
     target: string,
     province: string,
     label?:string,
+    attributesId?:string,
+    overviewId?:string,
+    imagesId?:string
+    postId?:string,
 }
+
+interface IProps{
+    postEdit?:IEditPost
+    setIsShowModal?:any
+}
+
 const { BsCameraFill, ImBin } = icons
 
-const CreatePost = () => {
+const CreatePost:React.FC<IProps> = ({postEdit,setIsShowModal}) => {
     const [payload, setPayload] = useState<IPayloadPost>({
-        categoryCode: '',
-        category:" ",
-        title: '',
-        priceNumber: 0,
-        areaNumber: 0,
-        images: [],
-        address: '',
-        priceCode: '',
-        areaCode: '',
-        description: '',
-        target: '',
+        categoryCode: postEdit ? postEdit.categoryCode :" ",
+        category:postEdit ? postEdit.overviews?.type : '',
+        title: postEdit ? postEdit.title : '',
+        priceNumber: postEdit ? postEdit.priceNumber * 1000000 : 0,
+        areaNumber: postEdit ? postEdit.areaNumber : 0,
+        images:[],
+        address: postEdit ? postEdit.address : '',
+        priceCode: postEdit ? postEdit.priceCode : '',
+        areaCode: postEdit ? postEdit.areaCode : '',
+        description: postEdit ? JSON.parse(postEdit.description):'',
+        target:  postEdit ? postEdit.overviews?.target : '',
         province: ''
     })
+    
     const [isLoading, setIsLoading] = useState(false)
     const [imagesPreview, setImagesPreview] = useState<string[]>([])
     const { prices, areas,categories } = useAppSelector(state => state.app)
     const { currentData } = useAppSelector(state => state.user) 
+
+    useEffect(()=>{
+        if(postEdit){
+        let image = JSON.parse(postEdit?.images.image)
+        setPayload(prev => ({ ...prev, images: [...prev.images, ...image] }))
+        setImagesPreview(image)
+        }
+    },[postEdit])
+
     const handleFiles = async (e:React.ChangeEvent<HTMLInputElement>) => {
         e.stopPropagation()
         setIsLoading(true)
@@ -72,7 +93,6 @@ const CreatePost = () => {
         }))
     }
 
-    
     const handleSubmit = async () => {
         let priceCodeArr = getCodes(+payload.priceNumber / Math.pow(10,6), prices, 1, 15)
         let priceCode = priceCodeArr[0]?.code
@@ -87,49 +107,78 @@ const CreatePost = () => {
             userId:currentData.id,
             priceNumber: +payload.priceNumber / Math.pow(10,6),
             areaNumber:Number(payload.areaNumber),
-            label:`${categories?.find(item=>item.code === payload.categoryCode)?.value} ${payload?.address.split(',')[0]}`
+            label:`${categories?.find(item=>item.code === payload.categoryCode)?.value} ${payload?.address.split(',')[1].trim()}`
         }
-        console.log(finalPayload);
-        const res:any= await apiCreatePost((finalPayload))
-        if(res.err === 0){
-            Swal.fire({
-                title: "Thành công",
-                text: "Bạn đã đăng tin thành công",
-                icon: "success",
-                confirmButtonText: "OK",
-              }).then(function () {
-                 setImagesPreview([])
-                 setPayload({
-                    categoryCode: '',
-                    category:"",
-                    title: '',
-                    priceNumber: 0,
-                    areaNumber: 0,
-                    images: [],
-                    address: '',
-                    priceCode: '',
-                    areaCode: '',
-                    description: '',
-                    target: '',
-                    province: ''
-                 })
-            });
+        if(postEdit){
+            let finalPayloadUpdate = {
+                ...finalPayload,
+                postId:postEdit.id,
+                attributesId:postEdit.attributesId,
+                overviewId:postEdit.overviewId,
+                imagesId:postEdit.imagesId
+            }
+            console.log(finalPayloadUpdate)
+            const res:any = await apiUpdatePostAdmin(finalPayloadUpdate)
+            if(res.err === 0){
+                Swal.fire({
+                    title: "Thành công",
+                    text: "Bạn đã cập nhật tin thành công",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    setIsShowModal(false)
+                });
+            }else{
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Bạn đã cập nhật tin không thành công",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                })
+            }
         }else{
-            Swal.fire({
-                title: "Lỗi",
-                text: "Bạn đã đăng tin không thành công",
-                icon: "error",
-                confirmButtonText: "OK",
-              })
+            const res:any= await apiCreatePost(finalPayload)
+            if(res.err === 0){
+                Swal.fire({
+                    title: "Thành công",
+                    text: "Bạn đã đăng tin thành công",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    setImagesPreview([])
+                    setPayload({
+                        categoryCode: '',
+                        category:"",
+                        title: '',
+                        priceNumber: 0,
+                        areaNumber: 0,
+                        images: [],
+                        address: '',
+                        priceCode: '',
+                        areaCode: '',
+                        description: '',
+                        target: '',
+                        province: ''
+                    })
+                });
+            }else{
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Bạn đã đăng tin không thành công",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                })
+            }
         }
+      
     }
 
     return (
         <div className='px-6'>
-        <h1 className='text-3xl font-medium py-4 border-b border-gray-200'>Đăng tin mới</h1>
+        <h1 className='text-3xl font-medium py-4 border-b border-gray-200'>{postEdit ? "Cập nhật tin đăng":"Tạo mới tin đăng"}</h1>
         <div className='flex gap-4'>
             <div className='py-4 flex flex-col gap-2 flex-auto'>
-                <Address payload={payload} setPayload={setPayload} />
+                <Address payload={payload} setPayload={setPayload} postEdit={postEdit}/>
                 <Overview payload={payload} setPayload={setPayload} />
                 <div className='w-full mb-6'>
                     <h2 className='font-semibold text-xl py-4'>Hình ảnh</h2>
@@ -179,4 +228,4 @@ const CreatePost = () => {
     );
 };
 
-export default CreatePost;
+export default memo(CreatePost);

@@ -185,7 +185,7 @@ export const getPostsAdmin = (page,id,query) => new Promise(async (resolve, reje
                 { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
                 { model: db.Overview, as: 'overviews', attributes: ['area', 'type', 'target','bonus','created','expired'] },
             ],
-            attributes: ['id', 'title', 'star', 'address', 'description']
+            // attributes: ['id', 'title', 'star', 'address', 'description']
         })
         resolve({
             err: response ? 0 : 1,
@@ -209,7 +209,7 @@ export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body})
             description: JSON.stringify(body.description) || null,
             areaCode: body.areaCode,
             priceCode: body.priceCode,
-            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")) || null,
+            provinceCode:body?.province.includes("Thành phố") ? generateCode(body?.province.replace("Thành phố ","")) : generateCode(body?.province.replace("Tỉnh ","")) || null,
             priceNumber: body.priceNumber,
             areaNumber: `${body.areaNumber}`
         },{
@@ -245,8 +245,8 @@ export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body})
                 ]
             },
             defaults:{
-                code:body?.province.includes("Thành phố") ? generateCode(body?.province.includes("Thành phố")) : generateCode(body?.province.includes("Tỉnh")),
-                value: body?.province.includes("Thành phố") ? body?.province.includes("Thành phố") : body?.province.includes("Tỉnh"),
+                code:body?.province.includes("Thành phố") ? generateCode(body?.province.replace("Thành phố ","")) : generateCode(body?.province.replace("Tỉnh ","")),
+                value: body?.province.includes("Thành phố") ? body?.province.replace("Thành phố ","") : body?.province.replace("Tỉnh ",""),
             }
         })
 
@@ -256,14 +256,13 @@ export const putPostsAdmin = ({postId,overviewId,imagesId,attributesId,...body})
             },
             defaults:{
                 code:labelCode,
-                body:body.label
+                value:body.label
             }
         })
 
         resolve({
             err: 0,
             msg: 'Updated',
-            response
         })
 
     } catch (error) {
