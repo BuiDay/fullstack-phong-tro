@@ -59,6 +59,34 @@ export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =
     }
 })
 
+export const getPostsServiceById = (postId) => new Promise(async (resolve, reject) => {
+    console.log(postId)
+    try {
+        const response = await db.Post.findOne({
+            where:{
+                id:postId
+                },
+                include: [
+                    { model: db.Image, as: 'images', attributes: ['image'] },
+                    { model: db.Attribute, as: 'attributes', attributes: ['price', 'acreage', 'published', 'hashtag'] },
+                    { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                    { model: db.Overview, as: 'overviews', attributes: ['area', 'type', 'target','bonus','created','expired'] },
+                ],
+                attributes: ['id', 'title', 'star', 'address', 'description']
+            },  
+        )
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Getting posts is failed.',
+            response
+        })
+
+    } catch (error) {
+        reject(error)
+    }
+})
+
+
 
 export const getNewPostService = () => new Promise(async (resolve, reject) => {
     try {

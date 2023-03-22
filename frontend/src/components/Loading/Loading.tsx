@@ -1,14 +1,19 @@
 import React from 'react';
 
-const Loading = () => {
+interface IProp{
+  height?:string,
+  width?:string,
+}
+
+const Loading:React.FC<IProp> = ({height,width}) => {
 
     const styles = `
     .loader {
         border: 8px solid #f3f3f3;
         border-radius: 50%;
         border-top: 8px solid #dddddd;
-        width: 80px;
-        height: 80px;
+        width: ${width ? width : "80px"};
+        height: ${height ? height : "80px"};;
         -webkit-animation: spin 1s linear infinite; /* Safari */
         animation: spin 1s linear infinite;
       }

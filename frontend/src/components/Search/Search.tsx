@@ -1,4 +1,4 @@
-import React, { useState,useCallback, useEffect } from 'react';
+import React, { useState,useCallback, useEffect,memo } from 'react';
 import icons from '../../utils/icons'
 import SearchItem from './SearchItem'
 import Modal from '../Modal/Modal';
@@ -54,7 +54,7 @@ const Search = () => {
         let titleSearch = `${queryTextObj.category
             ? queryTextObj.category
             : 'Cho thuê tất cả'} ${queryTextObj.province
-                ? `tỉnh ${queryTextObj.province}`
+                ? `ở ${queryTextObj.province}`
                 : ''} ${queryTextObj.price
                     ? `Giá ${queryTextObj.price}`
                     : ''} ${queryTextObj.area
@@ -109,4 +109,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default memo(Search);

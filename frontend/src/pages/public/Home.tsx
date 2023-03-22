@@ -11,8 +11,7 @@ const Home = () => {
     <>
         <Header/>
         <Navigation/>
-        <div className='w-1100 m-auto flex flex-col justify-start items-center'>
-            
+        <div className='w-1100 m-auto flex flex-col justify-start items-center'>           
             <Outlet />
             <Intro />
             <Contact />

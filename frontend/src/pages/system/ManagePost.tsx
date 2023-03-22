@@ -5,6 +5,8 @@ import moment from 'moment';
 import { Button } from '../../components';
 import ModalUpdatePost from '../../components/ModalUpdatePost/ModalUpdatePost';
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm';
+import { apiDeletePostAdmin } from '../../store/features/post/postService';
+import Swal from 'sweetalert2';
 
 export interface IEditPost{
     id?:string,
@@ -41,7 +43,7 @@ const ManagePost = () => {
 
     useEffect(()=>{
         dispatch(getPostAdmin())
-    },[isShowModal])
+    },[isShowModal,isShowModalConfirm])
 
     const checkStatus  = (datetime:any) => {
       return  moment(datetime.toString(),'DD/MM/YYYY').isAfter(new Date().toDateString())
@@ -56,6 +58,37 @@ const ManagePost = () => {
         setPostEdit(e)
         setIsShowModalConfirm(true)
     }
+
+    const handleDelete = async () =>{
+        if(postEdit){
+            const {id,attributesId,overviewId,imagesId} = postEdit
+            const params = {
+                postId:id,
+                attributesId,
+                overviewId,
+                imagesId
+            }
+            const res:any = await apiDeletePostAdmin(params)
+            if(res.err === 0){
+                Swal.fire({
+                    title: "Thành công",
+                    text: "Bạn đã xoá tin thành công",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    setIsShowModalConfirm(false)
+                });
+            }else{
+                Swal.fire({
+                    title: "Lỗi",
+                    text: "Bạn đã xoá tin không thành công",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                })
+            }
+        }
+    }
+
 
     return (
         <div className='px-6'>
@@ -110,7 +143,8 @@ const ManagePost = () => {
             />}
              {isShowModalConfirm && <ModalConfirm
                 setIsShowModalConfirm={setIsShowModalConfirm} 
-                postEdit = {postEdit}       
+                postEdit = {postEdit} 
+                handle = {handleDelete}
                 title = 'Bạn có muốn xóa bài ?'    
             />}
         </div>    

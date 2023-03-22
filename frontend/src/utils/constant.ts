@@ -7,6 +7,7 @@ export const path = {
     NHA_CHO_THUE: 'nha-cho-thue',
     CHO_THUE_PHONG_TRO: 'cho-thue-phong-tro',
     SEARCH: '/tim-kiem',
+    DETAIL:'chi-tiet/*',
     SYSTEM: '/he-thong/*',
     CREATE_POST: 'tao-moi-bai-dang',
     MANAGE_POST: 'quan-ly-bai-dang',

@@ -3,7 +3,6 @@ import {Routes, Route ,BrowserRouter} from 'react-router-dom'
 import './App.css';
 import { Header, Home, HomePage, Login,Register,Rental } from './pages/public';
 import { path } from './utils/constant';
-import Navigation from './components/Navigation/Navigation'
 import { useAppSelector, useAppDispatch } from './store/hook'
 import { getCategories,apiGetAreas,apiGetPrices,apiGetProvinces } from './store/features/app/appSilce';
 import { apiGetCurrent } from './store/features/user/userSilce';
@@ -12,6 +11,7 @@ import System from './pages/system/System';
 import CreatePost from './pages/system/CreatePost';
 import ManagePost from './pages/system/ManagePost';
 import Profile from './pages/system/Profile';
+import DetailPage from './pages/public/DetailPage';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,6 +41,7 @@ function App() {
           <Route path={path.CHO_THUE_MAT_BANG} element = {<Rental id={2}/>} />
           <Route path={path.CHO_THUE_PHONG_TRO} element = {<Rental id={3}/>} />
           <Route path={path.NHA_CHO_THUE} element = {<Rental id={4}/>} />
+          <Route path={path.DETAIL} element = {<DetailPage/>} />
         </Route>
         <Route path={path.SYSTEM} element={<System />} >
           <Route path={path.CREATE_POST} element={<CreatePost />} />

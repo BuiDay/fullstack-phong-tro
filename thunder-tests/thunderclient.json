@@ -211,5 +211,31 @@
     ],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "68dfa7c6-b70a-4c52-87c4-c7aceb059762",
+    "colId": "b0abac8a-bd62-40f5-83cd-b43fcd11a906",
+    "containerId": "",
+    "name": "Get post by id",
+    "url": "http://localhost:8000/api/v1/post/get-post?id=0574ad89-258d-4ebf-a4af-12fa3a27305b",
+    "method": "GET",
+    "sortNum": 70000,
+    "created": "2023-03-22T04:35:46.062Z",
+    "modified": "2023-03-22T05:12:01.668Z",
+    "headers": [
+      {
+        "name": "id",
+        "value": "0574ad89-258d-4ebf-a4af-12fa3a27305b",
+        "isDisabled": true
+      }
+    ],
+    "params": [
+      {
+        "name": "id",
+        "value": "0574ad89-258d-4ebf-a4af-12fa3a27305b",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

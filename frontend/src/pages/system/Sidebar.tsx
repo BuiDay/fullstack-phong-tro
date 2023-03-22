@@ -25,7 +25,7 @@ const Sidebar = () => {
     <div className='w-[256px] h-screen fixed flex-none flex flex-col gap-1 bg-[#f3f3f3]'>
         <div className='flex flex-col gap-4 p-4'>
             <div className='flex items-center gap-4'>
-                <img src={require("../../asset/images/anon-avatar.png")} alt="avatar" className='w-12 h-12 object-cover rounded-full border-2 border-white' />
+                <img src={currentData.avatar ? JSON.parse(currentData.avatar) : require("../../asset/images/anon-avatar.png")} alt="avatar" className='w-12 h-12 object-cover rounded-full border-2 border-white' />
                 <div className='flex flex-col justify-center'>
                     <span className='font-semibold'>{currentData?.name}</span>
                     <small>{currentData?.phone}</small>

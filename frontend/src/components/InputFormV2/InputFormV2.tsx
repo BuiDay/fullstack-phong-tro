@@ -9,13 +9,14 @@ interface IProps{
     setValue?:Dispatch<SetStateAction<IPayloadPost>> | any, 
     name?:string, 
     small?:string, 
+    direction?:string,
 }
 
-const InputFormV2:React.FC<IProps> = ({ label, unit, value, setValue, name, small }) => {
+const InputFormV2:React.FC<IProps> = ({ label, unit, value, setValue, name, small,direction}) => {
     return (
-        <div>
-            <label className='font-medium' htmlFor="title">{label}</label>
-            <div className='flex items-center'>
+        <div className={`flex ${direction ? direction :"flex-col"}`}>
+            <label className='font-medium w-48' htmlFor="title">{label}</label>
+            <div className='flex items-center flex-auto'>
                 <input
                     type="text"
                     id=" title"

@@ -7,25 +7,12 @@ interface IProps{
     setIsShowModalConfirm?:any,
     postEdit?:IEditPost,
     title?:string,
+    handle?:any,
 }
 
-const ModalConfirm:React.FC<IProps> = ({setIsShowModalConfirm,postEdit,title}) => {
+const ModalConfirm:React.FC<IProps> = ({setIsShowModalConfirm,postEdit,title,handle}) => {
     const handelShow = ():void =>{
         setIsShowModalConfirm(false)
-    }
-
-    const handleDelete = async () =>{
-        if(postEdit){
-            const {id,attributesId,overviewId,imagesId} = postEdit
-            const params = {
-                postId:id,
-                attributesId,
-                overviewId,
-                imagesId
-            }
-            const res:any = await apiDeletePostAdmin(params)
-            console.log(res)
-        }
     }
 
     return (
@@ -41,7 +28,7 @@ const ModalConfirm:React.FC<IProps> = ({setIsShowModalConfirm,postEdit,title}) =
             >
                 <h1 className='text-center text-lg'>{title}</h1>
                 <div className='flex justify-center gap-5 mt-10'>
-                    <Button text="Có" bgColor='bg-secondary2' textColor="text-white" onClick={()=>handleDelete()}></Button>
+                    <Button text="Có" bgColor='bg-secondary2' textColor="text-white" onClick={()=>handle()}></Button>
                     <Button text="Không" bgColor='bg-green-500' textColor="text-white" onClick={()=>handelShow()}></Button>
                 </div>
             </div>

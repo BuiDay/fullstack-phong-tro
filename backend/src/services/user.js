@@ -19,3 +19,25 @@ export const getOne = (id) => new Promise(async (resolve, reject) => {
         reject(error)
     }
 })
+
+
+export const updateUser = (id,body) => new Promise(async (resolve, reject) => {
+    try {
+        const {name,zalo,fbUrl,avatar} = body
+        const response = await db.User.update(
+            {
+                name,zalo,fbUrl,avatar
+            },
+            {
+                where: { id },
+            }
+        )
+        resolve({
+            err: 1,
+            msg: 'Update user',
+            response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
