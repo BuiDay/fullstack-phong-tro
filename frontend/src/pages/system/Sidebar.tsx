@@ -14,7 +14,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const { currentData } = useAppSelector(state => state.user)
     const userId = currentData.id?.toString()
-
+    console.log(currentData)
     const handleLogout = () =>{
         dispatch(logout())
         setTimeout(function(){

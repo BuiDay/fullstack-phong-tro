@@ -38,7 +38,7 @@ const Rental:React.FC<IProps> = ({id}) => {
             </div>
             </>}
         </div>
-    </div>
+        </div>
     );
 };
 

@@ -44,7 +44,7 @@ export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =
             include: [
                 { model: db.Image, as: 'images', attributes: ['image'] },
                 { model: db.Attribute, as: 'attributes', attributes: ['price', 'acreage', 'published', 'hashtag'] },
-                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone','avatar'] },
             ],
             attributes: ['id', 'title', 'star', 'address', 'description']
         })
@@ -60,7 +60,6 @@ export const getPostsLimitService = (page, query, { priceNumber, areaNumber }) =
 })
 
 export const getPostsServiceById = (postId) => new Promise(async (resolve, reject) => {
-    console.log(postId)
     try {
         const response = await db.Post.findOne({
             where:{
@@ -69,7 +68,7 @@ export const getPostsServiceById = (postId) => new Promise(async (resolve, rejec
                 include: [
                     { model: db.Image, as: 'images', attributes: ['image'] },
                     { model: db.Attribute, as: 'attributes', attributes: ['price', 'acreage', 'published', 'hashtag'] },
-                    { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone'] },
+                    { model: db.User, as: 'user', attributes: ['name', 'zalo', 'phone','fbUrl','avatar'] },
                     { model: db.Overview, as: 'overviews', attributes: ['area', 'type', 'target','bonus','created','expired'] },
                 ],
                 attributes: ['id', 'title', 'star', 'address', 'description']
@@ -85,8 +84,6 @@ export const getPostsServiceById = (postId) => new Promise(async (resolve, rejec
         reject(error)
     }
 })
-
-
 
 export const getNewPostService = () => new Promise(async (resolve, reject) => {
     try {
@@ -195,7 +192,6 @@ export const postCreatePostService = (body, userId) => new Promise(async (resolv
         reject(error)
     }
 })
-
 
 export const getPostsAdmin = (page,id,query) => new Promise(async (resolve, reject) => {
     try {

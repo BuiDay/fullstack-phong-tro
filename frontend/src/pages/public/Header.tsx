@@ -34,6 +34,8 @@ const Header= () => {
         }
     },[error])
 
+    console.log(error)
+
     useEffect(()=>{
        if(isShowMenu){
         document.addEventListener("click",handleDropdown)
@@ -45,7 +47,7 @@ const Header= () => {
         <div className='w-1100 m-auto flex items-center justify-between'>
             <div>
                 <Link to="/"> 
-                    <img src='images/logo-removebg-preview.png' alt="logo" className='w-[240px] h-[70px] object-contain'/>
+                    <img src={require('../../asset/images/logo-removebg-preview.png')} alt="logo" className='w-[240px] h-[70px] object-contain'/>
                 </Link>
             </div>
             {

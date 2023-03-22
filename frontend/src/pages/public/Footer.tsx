@@ -8,7 +8,7 @@ const Footer = () => {
             <div className='w-1100 m-auto'>
                 <div className='flex-row flex'>
                     <div className='basis-1/2 px-2'>
-                        <img className='w-[240px] h-[70px] object-contain' src="images/logo-removebg-preview.png" alt="" />
+                        <img className='w-[240px] h-[70px] object-contain' src={require('../../asset/images/logo-removebg-preview.png')} alt="" />
                         <p className='mt-3 text-xs'>Phongtro123.com tự hào có lượng dữ liệu bài đăng lớn nhất trong lĩnh vực cho thuê phòng trọ.</p>
                     </div>
                     <div className='basis-1/3 px-2'>

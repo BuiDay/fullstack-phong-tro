@@ -9,7 +9,6 @@ const { GrStar, RiHeartFill, RiHeartLine, BsBookmarkStarFill } = icons
 
 const Item:React.FC<IPost> = ({ images, user, title, star, description, attributes, address, id }) => {
     const [isHoverHeart, setIsHoverHeart] = useState(false)
-
     // const handleStar = (star:number) => {
     //     let stars:JSX.Element[] = []
     //     for (let i = 1; i <= +star; i++) stars.push(<GrStar className='star-item' size={18} color='#f39406' />)
@@ -67,7 +66,7 @@ const Item:React.FC<IPost> = ({ images, user, title, star, description, attribut
                 </p>
                 <div className='flex items-center my-5 justify-between'>
                     <div className=' flex items-center'>
-                        <img src="https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png" alt="avatar" className='w-[30px] h-[30px] object-cover rounded-full' />
+                        <img src={user?.avatar && JSON.parse(user?.avatar) || `https://lnsel.com/wp-content/uploads/2018/12/anon-avatar-300x300.png`} alt="avatar" className='w-[30px] h-[30px] object-cover rounded-full' />
                         <p className='ml-2'>{user?.name}</p>
                     </div>
                     <div className='flex items-center gap-1 whitespace-nowrap'>
