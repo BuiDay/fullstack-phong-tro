@@ -73,7 +73,7 @@ const Search = () => {
     // }, [location])
 
     return (
-        <div className='p-[10px] w-1100 my-3 mx-auto bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2'>
+        <div className='p-[10px] max-w-[1100px] w-full my-0 md:my-3 mx-auto bg-[#febb02] rounded-lg flex flex-wrap md:flex-row items-center justify-around gap-2'>
                 <span className='cursor-pointer flex-1' onClick={() => categories && handleShowModal(categories, 'category', 'Tìm tất cả','Chọn loại bất động sản')}>
                     <SearchItem IconBefore={<MdOutlineHouseSiding />} fontWeight IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.category} defaultText={'Tìm tất cả'} />
                 </span>
@@ -89,7 +89,7 @@ const Search = () => {
             <button
                     type='button' 
                     onClick={handleSearch}
-                    className='outline-none py-2 px-4 flex-1 bg-secondary text-[13.3px] flex items-center justify-center gap-2 text-white font-medium rounded-md'
+                    className='outline-none py-1 px-1 md:py-2 md:px-4 flex-1 bg-secondary text-[13.3px] flex items-center justify-center gap-2 text-white font-medium rounded-md'
                 >
                     <FiSearch />
                     Tìm kiếm

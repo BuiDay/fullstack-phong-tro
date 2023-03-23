@@ -11,7 +11,7 @@ const Home = () => {
     <>
         <Header/>
         <Navigation/>
-        <div className='w-1100 m-auto flex flex-col justify-start items-center'>           
+        <div className='max-w-[1100px] m-auto flex flex-col justify-start items-center px-[15px] xl:px-[0px] '>           
             <Outlet />
             <Intro />
             <Contact />

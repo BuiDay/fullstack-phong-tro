@@ -109,6 +109,7 @@ const CreatePost:React.FC<IProps> = ({postEdit,setIsShowModal}) => {
             areaNumber:Number(payload.areaNumber),
             label:`${categories?.find(item=>item.code === payload.categoryCode)?.value} ${payload?.address.split(',')[1].trim()}`
         }
+        console.log(finalPayload)
         if(postEdit){
             let finalPayloadUpdate = {
                 ...finalPayload,
@@ -117,7 +118,7 @@ const CreatePost:React.FC<IProps> = ({postEdit,setIsShowModal}) => {
                 overviewId:postEdit.overviewId,
                 imagesId:postEdit.imagesId
             }
-            console.log(finalPayloadUpdate)
+            
             const res:any = await apiUpdatePostAdmin(finalPayloadUpdate)
             if(res.err === 0){
                 Swal.fire({
@@ -137,6 +138,7 @@ const CreatePost:React.FC<IProps> = ({postEdit,setIsShowModal}) => {
                 })
             }
         }else{
+            console.log(finalPayload)
             const res:any= await apiCreatePost(finalPayload)
             if(res.err === 0){
                 Swal.fire({

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <div className='w-full bg-white mt-20 py-7'>
-            <div className='w-1100 m-auto'>
-                <div className='flex-row flex'>
+        <div className='w-full bg-white px-[15px] md:px-0 mt-20 py-7'>
+            <div className='max-w-[1100px] w-full m-auto'>
+                <div className='flex flex-col gap-3 text-center md:text-left md:flex-row md:gap-0'>
                     <div className='basis-1/2 px-2'>
                         <img className='w-[240px] h-[70px] object-contain' src={require('../../asset/images/logo-removebg-preview.png')} alt="" />
-                        <p className='mt-3 text-xs'>Phongtro123.com tự hào có lượng dữ liệu bài đăng lớn nhất trong lĩnh vực cho thuê phòng trọ.</p>
+                        <p className='md:mt-3 text-xs'>Phongtro123.com tự hào có lượng dữ liệu bài đăng lớn nhất trong lĩnh vực cho thuê phòng trọ.</p>
                     </div>
                     <div className='basis-1/3 px-2'>
                         <ul>
@@ -85,7 +85,7 @@ const Footer = () => {
                         <ul>
                             <li className='font-bold text-sm'>Liên hệ với chúng tôi</li>
                             <li className='mt-3'>
-                                <div className='flex items-center gap-2'>
+                                <div className='flex items-center justify-center md:justify-start gap-2'>
                                     <div className='w-[35px] h-[35px] object-contain'>
                                         <img src="images/icon_facebook.svg" alt="" />
                                     </div>
@@ -107,7 +107,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>  
-                <div className='flex-col flex gap-2 items-center mt-5 py-5 text-sm'>
+                <div className='flex-col flex gap-2 items-center text-center mt-5 py-5 text-sm'>
                     <h1 className='font-medium'>CÔNG TY TNHH LBKCORP</h1>
                     <h2 className='font-medium'>Tổng đài CSKH: 0917686101</h2>
                     <p>Copyright © 2015 - 2023 Phongtro123.com</p>

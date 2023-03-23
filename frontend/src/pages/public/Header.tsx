@@ -7,7 +7,7 @@ import { useAppSelector, useAppDispatch } from '../../store/hook'
 import { logout } from '../../store/features/auth/authSilce';
 import icons from '../../utils/icons'
 
-const { ImPencil2, MdOutlineLibraryBooks, BiUserPin,AiOutlineLogout } = icons
+const { ImPencil2, MdOutlineLibraryBooks, BiUserPin,AiOutlineLogout,VscMenu } = icons
 
 const Header= () => {
     const dispatch = useAppDispatch();
@@ -44,15 +44,18 @@ const Header= () => {
     },[isShowMenu])
  
     return (
-        <div className='w-1100 m-auto flex items-center justify-between'>
+        <div className='max-w-[1100px] h-[60px] md:h-[70px] m-auto flex items-center justify-between xl:px-[0px] px-[15px]'>
             <div>
                 <Link to="/"> 
-                    <img src={require('../../asset/images/logo-removebg-preview.png')} alt="logo" className='w-[240px] h-[70px] object-contain'/>
+                    <img src={require('../../asset/images/logo-removebg-preview.png')} alt="logo" className='md:w-[240px] md:h-[70px] h-[40px] object-contain'/>
                 </Link>
+            </div>
+            <div className='md:hidden'>
+                <VscMenu size={30} />
             </div>
             {
                 isLoggedIn ? <>
-                    <div className='flex items-center gap-2'>
+                    <div className='hidden md:flex md:items-center md:gap-2'>
                         <img src={currentData?.avatar && JSON.parse(currentData?.avatar) || "images/anon-avatar.png"} alt="avatar" className='w-10 object-cover rounded-full h-10 border-2 shadow-md border-white' />
                         <div className='flex flex-col'>
                             <span>Xin chào, <span className='font-semibold'>{currentData?.name}</span></span>
@@ -105,7 +108,7 @@ const Header= () => {
                         <Button text="Đăng tin mới" textColor="text-white" bgColor = "bg-secondary2" icon={<AiOutlinePlusCircle/>}/>
                     </div>
                 </>:(
-                    <div className='flex items-center gap-2'>
+                    <div className='hidden md:flex md:items-center md:gap-2'>
                         <small></small>
                         <Button text="Đăng nhập" textColor="text-white" bgColor = "bg-[#3961fb]" link={path.LOGIN}/>
                         <Button text="Đăng ký" textColor="text-white" bgColor = "bg-[#3961fb]" link={path.REGISTER}/>

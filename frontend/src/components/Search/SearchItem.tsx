@@ -11,7 +11,7 @@ interface Iprops{
 
 const SearchItem:React.FC<Iprops> = ({ IconBefore, IconAfter, text, fontWeight, defaultText }) => {
     return (
-        <div className='bg-white py-2 px-4 w-full rounded-md text-gray-400 text-[13.3px] flex items-center justify-between'>
+        <div className='bg-white py-1 px-1 md:py-2 md:px-4 w-full rounded-md text-gray-400 text-[13.3px] flex items-center justify-between'>
             <div className='flex items-center gap-1 w-full'>
                 {IconBefore}
                 <span

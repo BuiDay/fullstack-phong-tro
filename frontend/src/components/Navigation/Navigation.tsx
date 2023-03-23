@@ -18,7 +18,7 @@ interface IProps{
 const Navigation:React.FC<IProps> = ({ isAdmin }) => {
     const categories  = useAppSelector((state:RootState) => state.app.categories)
     return (
-        <div className={`w-full ${isAdmin ? 'justify-start fixed' : 'justify-center'} h-[40px] bg-secondary flex items-center text-white`}>
+        <div className={`hidden md:w-full ${isAdmin ? 'md:justify-start fixed' : 'md:justify-center'} md:h-[40px] md:px-[15px] bg-secondary md:flex md:items-center text-white `}>
             <div className='w-1100 h-full items-center flex text-sm font-medium'>
                     <div className='h-full'>
                         <NavLink

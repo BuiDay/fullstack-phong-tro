@@ -33,7 +33,7 @@ const Overview:React.FC<IProps> = ({payload,setPayload}) => {
                         rows={10}
                         className='w-full rounded-md outline-none border border-gray-300 p-2'
                         value={payload.description}
-                        onChange={(e) => setPayload(prev => ({ ...prev, description: e.target.value }))}
+                        onChange={(e) => setPayload(prev => ({ ...prev, description: e.target.value}))}
                     ></textarea>
                 </div>
                 <div className='w-1/2 flex flex-col gap-4'>

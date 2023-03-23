@@ -105,7 +105,7 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
     }, [persent1, persent2])
     return (
         <div 
-        className='fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center'
+        className='fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center px-[15px]'
         onClick={() => { setIsShowModal(false) }}
         >
         <div
@@ -113,18 +113,27 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
                 e.stopPropagation()
                 setIsShowModal(true)
             }}
-            className={`w-2/5 h-[500px] bg-white rounded-md relative ${name === 'province' ? "overflow-y-auto": ""}`}
+            className={`h-[500px] md:min-w-[500px] md:min-h-[500px] max-w-[600px] bg-white rounded-md relative ${name === 'province' ? "overflow-y-auto": ""}`}
         >
-            <div className='h-[45px] px-4 flex items-center border-b border-gray-200'>
-                <span className='cursor-pointer'
+            <div className='h-[35px] md:h-[45px] px-4 flex items-center border-b border-gray-200'>
+                <span className='hidden md:block cursor-pointer'
                     onClick={(e) => {
                         e.stopPropagation()
                         setIsShowModal(false)}}
                 >
                     <GrLinkPrevious size={24} />
                 </span>
-                <div className='w-full text-center'>
-                    <span className='text-xl font-medium'>{title && title}</span>
+
+                <span className='md:hidden cursor-pointer'
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        setIsShowModal(false)}}
+                >
+                    <GrLinkPrevious size={18} />
+                </span>
+
+                <div className='w-full text-center ml-3'>
+                    <span className='text-lg md:text-xl font-medium'>{title && title}</span>
                 </div>
             </div>
             {(name === 'category' || name === 'province') && 
@@ -158,7 +167,7 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
                 </div>
                 }
            
-           {(name === 'price' || name === 'area') && <div className='p-12 py-20 '>
+           {(name === 'price' || name === 'area') && <div className='px-10 md:p-12 py-20'>
                     <div className='flex flex-col items-center justify-center relative'>
                         <div className='z-30 absolute top-[-48px] font-bold text-xl text-orange-600'>
                             {(persent1 === 100 && persent2 === 100)
@@ -226,7 +235,7 @@ const Modal:React.FC<IProps> = ({setIsShowModal,content,name,defaultText,title,h
                                     <button
                                         key={item.code}
                                         onClick={() => handleActive(item.code, item.value)}
-                                        className={`px-4 py-2 rounded-md cursor-pointer ${item.code === activedEl ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+                                        className={`grow py-1 px-1 md:px-4 md:py-2  rounded-md cursor-pointer ${item.code === activedEl ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
                                     >
                                         {name === 'area' ? item.value + "\xb2" :item.value}
                                     </button>

@@ -15,9 +15,9 @@ const Intro = () => {
     const { categories } = useAppSelector(state => state.app)
 
     return (
-        <div className='w-1100 bg-white rounded-md mt-10 shadow-md p-10 gap-4 flex-col flex justify-center items-center'>
+        <div className='max-w-[1100px] w-full bg-white rounded-md p-5 mt-5 md:mt-10 md:p-10 shadow-md gap-4 flex-col flex justify-center items-center'>
             <h3 className='font-bold text-lg'>{text.title}</h3>
-            <p className='text-gray-800 text-center my-4'>
+            <p className='text-gray-800 text-center md:my-4'>
                 {text.description}
                 <span className='text-link'>
                     {categories && categories?.length > 0 && categories.map(item => {
@@ -34,7 +34,7 @@ const Intro = () => {
                 </span>
                 {text.description2}
             </p>
-            <div className='flex items-center justify-around w-full'>
+            <div className='flex flex-col gap-3 md:flex-row items-center justify-around w-full'>
                 {text.statistic.map((item, index) => {
                     return (
                         <div className='flex flex-col justify-center items-center' key={index}>

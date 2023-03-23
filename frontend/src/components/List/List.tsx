@@ -51,8 +51,8 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
     
     return (
         <div className='w-full bg-white shadow-md rounded-md'>
-            <div className='flex items-center justify-between p-3'>
-                <h4 className='text-xl font-semibold'>Danh sách tin đăng</h4>
+            <div className='flex flex-wrap items-center justify-between p-3'>
+                <h4 className='text-lg md:text-xl font-semibold'>Danh sách tin đăng</h4>
                 <span>Cập nhật: 12:05 25/08/2022</span>
             </div>
             <div className='flex items-center gap-2 my-2 px-3 '>
@@ -60,7 +60,7 @@ const List:React.FC<IProps> = ({ categoryCode }) => {
                 <Button bgColor='bg-gray-200' text='Mặc định' py="py-1"/>
                 <Button bgColor='bg-gray-200' text='Mới nhất' py="py-1"/>
             </div>
-            <div className={`items ${ isLoading && isLoading ? "" : "p-10"}`}>
+            <div className={`items ${ isLoading && isLoading ? "" : "p-3 md:py-5 md:px-3"}`}>
                 {
                    isLoading && !isLoading ? <div className='flex justify-center'> <Loading /> </div> : 
                     <>
