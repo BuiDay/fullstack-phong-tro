@@ -1,11 +1,13 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "rent-housing",
-    "host": "127.0.0.1",
+    "password": "123456",
+    "database": "phongtro",
+    "host": "db",
+    "port":"3306",
     "dialect": "mysql",
-    "logging":false
+    "logging":false,
+    "timezone": "+07:00"
   },
   "test": {
     "username": "root",

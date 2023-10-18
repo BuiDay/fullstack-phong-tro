@@ -29,7 +29,6 @@ const dataBody = [
     },
 ]
 
-
 const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(12))
 
 export const insertService = () => new Promise(async (resolve, reject) => {
