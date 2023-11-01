@@ -8,12 +8,12 @@ const Footer = () => {
             <div className='max-w-[1100px] w-full m-auto'>
                 <div className='flex flex-col gap-3 text-center md:text-left md:flex-row md:gap-0'>
                     <div className='basis-1/2 px-2'>
-                        <img className='w-[240px] h-[70px] object-contain' src={require('../../asset/images/logo-removebg-preview.png')} alt="" />
-                        <p className='md:mt-3 text-xs'>Phongtro123.com tự hào có lượng dữ liệu bài đăng lớn nhất trong lĩnh vực cho thuê phòng trọ.</p>
+                        <img className='w-[240px] h-[70px] object-contain md:m-0 m-auto mb-3' src={require('../../asset/images/logo-removebg-preview.png')} alt="" />
+                        <p className='md:mt-3 text-xs'>Phongtro tự hào có lượng dữ liệu bài đăng lớn nhất trong lĩnh vực cho thuê phòng trọ.</p>
                     </div>
                     <div className='basis-1/3 px-2'>
                         <ul>
-                            <li className='font-bold text-sm'>Về PHONGTRO123.COM</li>
+                            <li className='font-bold text-sm'>Về PHONGTRO</li>
                             <li className='text-sm py-1 hover:underline'>
                                 <Link to="/">
                                     Trang chủ
@@ -110,7 +110,7 @@ const Footer = () => {
                 <div className='flex-col flex gap-2 items-center text-center mt-5 py-5 text-sm'>
                     <h1 className='font-medium'>CÔNG TY TNHH LBKCORP</h1>
                     <h2 className='font-medium'>Tổng đài CSKH: 0917686101</h2>
-                    <p>Copyright © 2015 - 2023 Phongtro123.com</p>
+                    <p>Copyright © 2015 - 2023 Phongtro</p>
                     <p>Email: cskh.phongtro123@gmail.com</p>
                     <p>Địa chỉ: LE-4.07, Toà nhà Lexington Residence, Số 67 Mai Chí Thọ, Phường An Phú, Quận 2, Tp. Hồ Chí Minh</p>
                     <p>Giấy phép đăng ký kinh doanh số 0313588502 do Sở kế hoạch và Đầu tư thành phố Hồ Chí Minh cấp ngày 24 tháng 12 năm 2015.</p>

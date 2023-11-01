@@ -70,18 +70,11 @@ const Item:React.FC<IPost> = ({ images, user, title, star, description, attribut
                         <p className='ml-2'>{user?.name}</p>
                     </div>
                     <div className='flex md:flex-nowrap flex-wrap justify-end items-center gap-1 whitespace-nowrap'>
-                        <button
-                            type='button'
-                            className='bg-blue-700 text-white px-2 rounded-md'
-                        >
+                        <Link target='_blank' to={`tel:${user.phone}`} className='bg-blue-700 text-white px-2 rounded-md'>
                             {`Gọi ${user?.phone}`}
-                        </button>
-                        <button
-                            type='button'
-                            className='text-blue-700 px-2 rounded-md border border-blue-700'
-                        >
-                            Nhắn zalo
-                        </button>
+                        </Link>
+          
+                        <Link target='_blank' to={`https://zalo.me/${user.zalo}`} className='text-blue-700 px-2 rounded-md border border-blue-700'>Nhắn zalo</Link>
                     </div>
                 </div>
             </div>

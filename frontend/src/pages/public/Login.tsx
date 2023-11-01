@@ -64,7 +64,7 @@ const Login = () => {
         }
     },[authState.isLoggedIn])
     return (
-        <div className='bg-white w-[600px] mt-10 p-[30px] pb-[100px] rounded-md shadow-sm'>
+        <div className='bg-white max-w-[600px] w-full mt-10 p-[30px] pb-[100px] rounded-md shadow-sm'>
             <h3 className='font-semibold text-2xl mb-3'>Đăng nhập</h3>
             <div className='flex flex-col gap-3 w-full'>
                 <div>

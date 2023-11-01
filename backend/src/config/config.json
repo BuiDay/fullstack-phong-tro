@@ -3,7 +3,7 @@
     "username": "root",
     "password": "123456",
     "database": "phongtro",
-    "host": "db",
+    "host": "103.14.224.105",
     "port":"3306",
     "dialect": "mysql",
     "logging":false,

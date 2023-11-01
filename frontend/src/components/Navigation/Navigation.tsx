@@ -1,6 +1,6 @@
 import React, { useEffect,useState} from 'react'
 import {NavLink} from 'react-router-dom'
-import { formatVietnameseToString } from '../../utils\/formatVietnameseToString'
+import { formatVietnameseToString } from '../../utils/formatVietnameseToString'
 import { RootState } from "../../store/redux";
 import { useAppSelector } from '../../store/hook'
 interface Icate{

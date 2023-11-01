@@ -59,8 +59,8 @@ const DetailPage = () => {
 
     console.log(getPost?.description && JSON.parse(getPost?.description))
     return (
-        <div className='w-full flex gap-4 mt-10'>
-                <div className='w-[70%] bg-white border'>
+        <div className='w-full md:flex md:flex-row flex flex-col-reverse gap-4 mt-10'>
+                <div className='md:w-[70%] bg-white border'>
                     <div className='h-[400px] bg-black rounded-xl overflow-hidden'>
                         <Swiper
                             pagination={{
@@ -90,7 +90,7 @@ const DetailPage = () => {
                             <MdLocationPin color='#1266dd'/> 
                             <p >{getPost?.address}</p>
                         </div>
-                        <div className='mt-2 flex items-center gap-5'>
+                        <div className='mt-2 md:flex items-center gap-5'>
                             <div className='flex items-center text-xl gap-1'>
                                 <CiMoneyBill color='gray' size={26}/>  
                                 <span className='text-green-500 font-bold'>{getPost?.attributes?.price}</span>
@@ -190,7 +190,7 @@ const DetailPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className='w-[30%] flex flex-col gap-4 justify-start items-center'>
+                <div className='md:w-[30%] flex flex-col gap-4 justify-start items-center'>
                     <div className='bg-yellow-300 w-full rounded-md flex flex-col justify-center items-center py-5 gap-4'>
                         <div className='h-[80px] w-[80px] object-contain'>
                             <img className='rounded-full' src={`${getPost?.user.avatar ? JSON.parse(getPost?.user.avatar) : require('../../asset/images/anon-avatar.png')}`} alt="" />
